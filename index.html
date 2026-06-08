@@ -6,22 +6,13 @@
 <title>ScholarSearch — Find Your Scholarship</title>
 <style>
   :root {
-    --primary: #4f46e5;
-    --primary-light: #818cf8;
-    --primary-dark: #3730a3;
-    --accent: #10b981;
-    --accent-light: #d1fae5;
-    --warn: #f59e0b;
-    --warn-light: #fef3c7;
-    --danger: #ef4444;
-    --danger-light: #fee2e2;
-    --bg: #f8fafc;
-    --card: #ffffff;
-    --border: #e2e8f0;
-    --text: #1e293b;
-    --muted: #64748b;
-    --tag-bg: #ede9fe;
-    --tag-text: #5b21b6;
+    --primary: #4f46e5; --primary-light: #818cf8; --primary-dark: #3730a3;
+    --accent: #10b981; --accent-light: #d1fae5;
+    --warn: #f59e0b; --warn-light: #fef3c7;
+    --danger: #ef4444; --danger-light: #fee2e2;
+    --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0;
+    --text: #1e293b; --muted: #64748b;
+    --tag-bg: #ede9fe; --tag-text: #5b21b6;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
@@ -29,14 +20,14 @@
   /* ── Header ── */
   header {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #7c3aed 100%);
-    color: white; padding: 2.5rem 2rem 3.5rem;
-    position: relative; overflow: hidden;
+    color: white; padding: 2.5rem 2rem 3.5rem; position: relative; overflow: hidden;
   }
   header::after {
     content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 40px;
     background: var(--bg); clip-path: ellipse(55% 100% at 50% 100%);
   }
   .header-inner { max-width: 1100px; margin: 0 auto; }
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
   .logo { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem; }
   .logo-icon { font-size: 1.8rem; }
   .logo-text { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.5px; }
@@ -48,6 +39,15 @@
   .stat-num { font-size: 1.5rem; font-weight: 700; }
   .stat-label { font-size: 0.78rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.05em; }
 
+  /* ── Auth button ── */
+  .auth-btn {
+    background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.4);
+    color: white; border-radius: 10px; padding: 0.5rem 1.1rem; font-size: 0.88rem;
+    font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.15s;
+    display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
+  }
+  .auth-btn:hover { background: rgba(255,255,255,0.25); }
+
   /* ── Search bar ── */
   .search-wrap { max-width: 1100px; margin: -1.2rem auto 0; padding: 0 2rem; position: relative; z-index: 10; }
   .search-box {
@@ -56,10 +56,7 @@
     border: 2px solid transparent; transition: border-color 0.2s;
   }
   .search-box:focus-within { border-color: var(--primary-light); }
-  .search-box input {
-    flex: 1; border: none; outline: none; font-size: 1rem; color: var(--text);
-    background: transparent; min-width: 0;
-  }
+  .search-box input { flex: 1; border: none; outline: none; font-size: 1rem; color: var(--text); background: transparent; min-width: 0; }
   .search-box input::placeholder { color: var(--muted); }
   .search-btn {
     background: var(--primary); color: white; border: none; border-radius: 10px;
@@ -73,51 +70,28 @@
   @media (max-width: 768px) { .main { grid-template-columns: 1fr; } .sidebar { order: 2; } }
 
   /* ── Sidebar ── */
-  .sidebar {}
-  .filter-card {
-    background: var(--card); border-radius: 14px; border: 1px solid var(--border);
-    padding: 1.4rem; margin-bottom: 1rem;
-  }
+  .filter-card { background: var(--card); border-radius: 14px; border: 1px solid var(--border); padding: 1.4rem; margin-bottom: 1rem; }
   .filter-card h3 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 1rem; }
   .filter-group { margin-bottom: 1.2rem; }
   .filter-group label { display: block; font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
   .filter-group select, .filter-group input[type=range] { width: 100%; }
-  .filter-group select {
-    padding: 0.5rem 0.8rem; border: 1.5px solid var(--border); border-radius: 8px;
-    font-size: 0.9rem; color: var(--text); background: white; cursor: pointer; outline: none;
-  }
+  .filter-group select { padding: 0.5rem 0.8rem; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.9rem; color: var(--text); background: white; cursor: pointer; outline: none; }
   .filter-group select:focus { border-color: var(--primary-light); }
   .gpa-val { font-size: 0.82rem; color: var(--primary); font-weight: 700; text-align: right; }
   input[type=range] { accent-color: var(--primary); cursor: pointer; }
-
   .tag-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .tag {
-    padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600;
-    background: var(--tag-bg); color: var(--tag-text); cursor: pointer; border: 2px solid transparent;
-    transition: all 0.15s;
-  }
+  .tag { padding: 0.3rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; background: var(--tag-bg); color: var(--tag-text); cursor: pointer; border: 2px solid transparent; transition: all 0.15s; }
   .tag.active { background: var(--primary); color: white; border-color: var(--primary); }
   .tag:hover:not(.active) { border-color: var(--primary-light); }
-
-  .btn-clear {
-    width: 100%; padding: 0.6rem; border-radius: 8px; border: 1.5px solid var(--border);
-    background: white; font-size: 0.88rem; color: var(--muted); cursor: pointer; font-weight: 600;
-    transition: all 0.15s; margin-top: 0.5rem;
-  }
+  .btn-clear { width: 100%; padding: 0.6rem; border-radius: 8px; border: 1.5px solid var(--border); background: white; font-size: 0.88rem; color: var(--muted); cursor: pointer; font-weight: 600; transition: all 0.15s; margin-top: 0.5rem; }
   .btn-clear:hover { border-color: var(--danger); color: var(--danger); }
 
-  /* ── Results area ── */
-  .results {}
+  /* ── Results ── */
   .results-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
   .results-count { font-size: 0.92rem; color: var(--muted); }
   .results-count strong { color: var(--text); }
   .sort-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: var(--muted); }
-  .sort-row select {
-    padding: 0.35rem 0.7rem; border: 1.5px solid var(--border); border-radius: 8px;
-    font-size: 0.88rem; color: var(--text); background: white; cursor: pointer; outline: none;
-  }
-
-  /* tabs */
+  .sort-row select { padding: 0.35rem 0.7rem; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.88rem; color: var(--text); background: white; cursor: pointer; outline: none; }
   .tabs { display: flex; gap: 0.3rem; background: white; border: 1.5px solid var(--border); border-radius: 10px; padding: 0.25rem; margin-bottom: 1.2rem; width: fit-content; }
   .tab { padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.88rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all 0.15s; border: none; background: none; }
   .tab.active { background: var(--primary); color: white; }
@@ -127,11 +101,12 @@
   .card {
     background: var(--card); border-radius: 14px; border: 1.5px solid var(--border);
     padding: 1.3rem 1.5rem; transition: box-shadow 0.2s, border-color 0.2s;
-    display: flex; flex-direction: column; gap: 0.7rem; position: relative;
+    display: flex; flex-direction: column; gap: 0.7rem; position: relative; cursor: pointer;
   }
   .card:hover { box-shadow: 0 6px 24px rgba(79,70,229,0.1); border-color: var(--primary-light); }
   .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
-  .card-title { font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .card-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); line-height: 1.3; text-decoration: underline; text-underline-offset: 2px; }
+  .card-title:hover { color: var(--primary-dark); }
   .card-amount { font-size: 1.1rem; font-weight: 800; color: var(--accent); white-space: nowrap; }
   .card-org { font-size: 0.85rem; color: var(--muted); margin-top: 0.1rem; }
   .card-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
@@ -142,49 +117,161 @@
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.2rem; flex-wrap: wrap; gap: 0.5rem; }
   .deadline-badge { display: flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; }
   .deadline-badge .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .deadline-dot-green { background: var(--accent); }
-  .deadline-dot-yellow { background: var(--warn); }
-  .deadline-dot-red { background: var(--danger); }
-  .deadline-text-green { color: var(--accent); }
-  .deadline-text-yellow { color: #b45309; }
-  .deadline-text-red { color: var(--danger); }
+  .deadline-dot-green { background: var(--accent); } .deadline-dot-yellow { background: var(--warn); } .deadline-dot-red { background: var(--danger); }
+  .deadline-text-green { color: var(--accent); } .deadline-text-yellow { color: #b45309; } .deadline-text-red { color: var(--danger); }
   .card-actions { display: flex; gap: 0.5rem; }
-  .btn-save {
-    display: flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.9rem;
-    border-radius: 8px; border: 1.5px solid var(--border); background: white;
-    font-size: 0.82rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.15s;
-  }
+  .btn-save { display: flex; align-items: center; gap: 0.35rem; padding: 0.4rem 0.9rem; border-radius: 8px; border: 1.5px solid var(--border); background: white; font-size: 0.82rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.15s; }
   .btn-save:hover { border-color: var(--primary-light); color: var(--primary); }
   .btn-save.saved { background: var(--tag-bg); border-color: var(--primary-light); color: var(--primary); }
-  .btn-apply {
-    padding: 0.4rem 1rem; border-radius: 8px; border: none;
-    background: var(--primary); color: white; font-size: 0.82rem; font-weight: 600;
-    cursor: pointer; transition: background 0.15s; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;
-  }
-  .btn-apply:hover { background: var(--primary-dark); }
+  .btn-view { padding: 0.4rem 1rem; border-radius: 8px; border: none; background: var(--primary); color: white; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  .btn-view:hover { background: var(--primary-dark); }
 
   .empty-state { text-align: center; padding: 4rem 2rem; color: var(--muted); }
   .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
   .empty-state h3 { font-size: 1.1rem; color: var(--text); margin-bottom: 0.4rem; }
 
-  /* Footer */
+  /* ── Detail Overlay ── */
+  .overlay-backdrop {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+    z-index: 1000; backdrop-filter: blur(2px);
+  }
+  .overlay-backdrop.open { display: flex; align-items: flex-start; justify-content: center; padding: 2rem 1rem; overflow-y: auto; }
+  .detail-panel {
+    background: white; border-radius: 18px; width: 100%; max-width: 920px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.25); display: grid;
+    grid-template-columns: 1fr 260px; min-height: 0; position: relative;
+    animation: slideUp 0.25s ease;
+  }
+  @keyframes slideUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+  @media (max-width: 680px) { .detail-panel { grid-template-columns: 1fr; } .detail-sidebar { border-left: none; border-top: 1px solid var(--border); border-radius: 0 0 18px 18px; } }
+  .detail-main { padding: 2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+  .detail-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; color: var(--muted); transition: all 0.15s; z-index: 1; }
+  .detail-close:hover { border-color: var(--danger); color: var(--danger); }
+  .detail-org-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--muted); }
+  .detail-name { font-size: 1.5rem; font-weight: 800; color: var(--text); line-height: 1.25; }
+  .detail-amount-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .detail-amount { font-size: 1.6rem; font-weight: 800; color: var(--accent); }
+  .detail-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .detail-tag { padding: 0.25rem 0.7rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; background: var(--tag-bg); color: var(--tag-text); }
+  .detail-tag.grade { background: #e0f2fe; color: #0369a1; }
+  .detail-tag.gpa { background: #fef3c7; color: #92400e; }
+  .detail-section h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 0.5rem; }
+  .detail-section p { font-size: 0.93rem; line-height: 1.6; color: var(--text); }
+  .detail-section ul { padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .detail-section ul li { font-size: 0.91rem; color: var(--text); line-height: 1.5; }
+  .detail-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .detail-field { background: var(--bg); border-radius: 10px; padding: 0.7rem 0.9rem; }
+  .detail-field-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 0.2rem; }
+  .detail-field-val { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+  .detail-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+  .btn-apply-lg { padding: 0.7rem 1.6rem; border-radius: 10px; background: var(--primary); color: white; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: background 0.15s; border: none; cursor: pointer; }
+  .btn-apply-lg:hover { background: var(--primary-dark); }
+  .btn-save-lg { padding: 0.7rem 1.4rem; border-radius: 10px; border: 1.5px solid var(--border); background: white; font-size: 0.95rem; font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 0.4rem; }
+  .btn-save-lg:hover { border-color: var(--primary-light); color: var(--primary); }
+  .btn-save-lg.saved { background: var(--tag-bg); border-color: var(--primary-light); color: var(--primary); }
+
+  /* ── Countdown Sidebar ── */
+  .detail-sidebar {
+    border-left: 1px solid var(--border); border-radius: 0 18px 18px 0;
+    padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;
+    background: linear-gradient(180deg, #fafafe 0%, #f0f0ff 100%);
+  }
+  .countdown-box { background: white; border-radius: 14px; border: 1.5px solid var(--border); padding: 1.2rem; text-align: center; }
+  .countdown-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 1rem; }
+  .countdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .countdown-unit { background: var(--bg); border-radius: 10px; padding: 0.6rem 0.3rem; }
+  .countdown-num { font-size: 1.6rem; font-weight: 800; color: var(--primary); line-height: 1; }
+  .countdown-label { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-top: 0.2rem; }
+  .countdown-closed { font-size: 1rem; font-weight: 700; color: var(--danger); padding: 0.5rem 0; }
+  .sidebar-deadline { text-align: center; }
+  .sidebar-deadline-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 0.3rem; }
+  .sidebar-deadline-date { font-size: 1rem; font-weight: 700; color: var(--text); }
+  .sidebar-info { display: flex; flex-direction: column; gap: 0.7rem; }
+  .sidebar-info-item { display: flex; flex-direction: column; gap: 0.15rem; }
+  .sidebar-info-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .sidebar-info-val { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+
+  /* ── Auth Modal ── */
+  .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
+  .modal-backdrop.open { display: flex; }
+  .modal { background: white; border-radius: 18px; padding: 2rem; width: 100%; max-width: 420px; box-shadow: 0 24px 80px rgba(0,0,0,0.2); position: relative; animation: slideUp 0.2s ease; }
+  .modal-close { position: absolute; top: 1rem; right: 1rem; background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; color: var(--muted); }
+  .modal-close:hover { border-color: var(--danger); color: var(--danger); }
+  .modal h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.3rem; }
+  .modal-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .modal-tabs { display: flex; gap: 0; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 0.2rem; margin-bottom: 1.5rem; }
+  .modal-tab { flex: 1; text-align: center; padding: 0.45rem; border-radius: 8px; font-size: 0.88rem; font-weight: 600; cursor: pointer; color: var(--muted); border: none; background: none; transition: all 0.15s; }
+  .modal-tab.active { background: var(--primary); color: white; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+  .form-group input { width: 100%; padding: 0.6rem 0.9rem; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.93rem; color: var(--text); outline: none; transition: border-color 0.15s; }
+  .form-group input:focus { border-color: var(--primary-light); }
+  .btn-primary-full { width: 100%; padding: 0.75rem; border-radius: 10px; background: var(--primary); color: white; font-size: 1rem; font-weight: 700; border: none; cursor: pointer; transition: background 0.15s; margin-top: 0.5rem; }
+  .btn-primary-full:hover { background: var(--primary-dark); }
+  .auth-error { background: var(--danger-light); color: var(--danger); border-radius: 8px; padding: 0.6rem 0.9rem; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; display: none; }
+  .auth-success { background: var(--accent-light); color: #065f46; border-radius: 8px; padding: 0.6rem 0.9rem; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; display: none; }
+  .user-pill { display: flex; align-items: center; gap: 0.5rem; }
+  .user-avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+
   footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--border); margin-top: 2rem; }
 </style>
 </head>
 <body>
 
+<!-- Auth Modal -->
+<div class="modal-backdrop" id="authModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAuth()">✕</button>
+    <h2>Welcome to ScholarSearch</h2>
+    <p class="modal-sub">Sign in to save scholarships across sessions.</p>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tabLogin" onclick="switchAuthTab('login')">Sign In</button>
+      <button class="modal-tab" id="tabRegister" onclick="switchAuthTab('register')">Create Account</button>
+    </div>
+    <div id="authError" class="auth-error"></div>
+    <div id="authSuccess" class="auth-success"></div>
+    <div id="formLogin">
+      <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="you@example.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••"></div>
+      <button class="btn-primary-full" onclick="doLogin()">Sign In</button>
+    </div>
+    <div id="formRegister" style="display:none">
+      <div class="form-group"><label>Name</label><input type="text" id="regName" placeholder="Your name"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="regEmail" placeholder="you@example.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="regPass" placeholder="Min 6 characters"></div>
+      <button class="btn-primary-full" onclick="doRegister()">Create Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- Detail Overlay -->
+<div class="overlay-backdrop" id="detailOverlay" onclick="closeDetail(event)">
+  <div class="detail-panel" id="detailPanel">
+    <button class="detail-close" onclick="closeDetailBtn()">✕</button>
+    <div class="detail-main" id="detailMain"></div>
+    <div class="detail-sidebar" id="detailSidebar"></div>
+  </div>
+</div>
+
 <header>
   <div class="header-inner">
-    <div class="logo">
-      <span class="logo-icon">🎓</span>
-      <span class="logo-text">Scholar<span>Search</span></span>
-    </div>
-    <h1>Find Scholarships Made for You</h1>
-    <p>Browse 35+ curated scholarships for high school and college students. Filter by grade, GPA, and interest — then track your deadlines.</p>
-    <div class="stats-row">
-      <div class="stat"><span class="stat-num" id="totalCount">35</span><span class="stat-label">Scholarships</span></div>
-      <div class="stat"><span class="stat-num">$2M+</span><span class="stat-label">Total Available</span></div>
-      <div class="stat"><span class="stat-num">Free</span><span class="stat-label">No Sign-Up</span></div>
+    <div class="header-top">
+      <div>
+        <div class="logo">
+          <span class="logo-icon">🎓</span>
+          <span class="logo-text">Scholar<span>Search</span></span>
+        </div>
+        <h1>Find Scholarships Made for You</h1>
+        <p>Browse 100 curated scholarships for high school and college students. Filter by grade, GPA, and interest — then track your deadlines.</p>
+        <div class="stats-row">
+          <div class="stat"><span class="stat-num">100</span><span class="stat-label">Scholarships</span></div>
+          <div class="stat"><span class="stat-num">$10M+</span><span class="stat-label">Total Available</span></div>
+          <div class="stat"><span class="stat-num" id="savedCountHeader">0</span><span class="stat-label">Saved</span></div>
+        </div>
+      </div>
+      <div>
+        <button class="auth-btn" id="authBtnHeader" onclick="openAuth()">👤 Sign In</button>
+      </div>
     </div>
   </div>
 </header>
@@ -197,11 +284,9 @@
 </div>
 
 <div class="main">
-  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="filter-card">
       <h3>Filters</h3>
-
       <div class="filter-group">
         <label>Grade Level</label>
         <select id="gradeFilter" onchange="applyFilters()">
@@ -213,7 +298,6 @@
           <option value="college">College Students</option>
         </select>
       </div>
-
       <div class="filter-group">
         <label>Minimum Award Amount</label>
         <select id="amountFilter" onchange="applyFilters()">
@@ -224,12 +308,10 @@
           <option value="25000">$25,000+</option>
         </select>
       </div>
-
       <div class="filter-group">
         <label>Minimum GPA: <span class="gpa-val" id="gpaVal">Any</span></label>
         <input type="range" id="gpaFilter" min="0" max="4" step="0.1" value="0" oninput="updateGPA(this.value)" onchange="applyFilters()">
       </div>
-
       <div class="filter-group">
         <label>Category</label>
         <div class="tag-grid" id="categoryTags">
@@ -243,16 +325,16 @@
           <span class="tag" onclick="toggleTag(this,'Research')">Research</span>
           <span class="tag" onclick="toggleTag(this,'Business')">Business</span>
           <span class="tag" onclick="toggleTag(this,'Athletics')">Athletics</span>
+          <span class="tag" onclick="toggleTag(this,'International')">International</span>
+          <span class="tag" onclick="toggleTag(this,'Writing')">Writing</span>
         </div>
       </div>
-
       <button class="btn-clear" onclick="clearFilters()">✕ Clear All Filters</button>
     </div>
   </aside>
 
-  <!-- Results -->
   <section class="results">
-    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.5rem; margin-bottom:.8rem;">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem;">
       <div class="tabs">
         <button class="tab active" onclick="switchTab(this,'all')">All</button>
         <button class="tab" onclick="switchTab(this,'saved')">⭐ Saved (<span id="savedCount">0</span>)</button>
@@ -266,7 +348,7 @@
       </div>
     </div>
     <div class="results-header">
-      <div class="results-count">Showing <strong id="showCount">35</strong> scholarships</div>
+      <div class="results-count">Showing <strong id="showCount">100</strong> scholarships</div>
     </div>
     <div class="cards" id="cardsContainer"></div>
     <div class="empty-state" id="emptyState" style="display:none;">
@@ -277,350 +359,393 @@
   </section>
 </div>
 
-<footer>
-  ScholarSearch · Built as a student project · Always verify deadlines at the official scholarship website · Data current as of 2026
-</footer>
+<footer>ScholarSearch · Built as a student project · Always verify deadlines at the official scholarship website · Data current as of 2026</footer>
 
 <script>
 const scholarships = [
-  {
-    id:1, name:"Gates Scholarship", org:"Bill & Melinda Gates Foundation",
-    amount:200000, amountStr:"Full Ride (~$200K)", minGPA:3.3,
-    grades:["12","college"], categories:["Need-Based","Merit","Leadership"],
-    desc:"Highly competitive scholarship for exceptional, Pell-eligible minority high school seniors. Covers full cost of attendance at any accredited U.S. college.",
-    deadline:"2026-09-15", url:"https://www.thegatesscholarship.org"
-  },
-  {
-    id:2, name:"Coca-Cola Scholars Program", org:"Coca-Cola Scholars Foundation",
-    amount:20000, amountStr:"$20,000", minGPA:3.0,
-    grades:["12"], categories:["Merit","Leadership","Community"],
-    desc:"One of the most prestigious scholarships for seniors. 150 scholars selected each year based on academic excellence, leadership, and service.",
-    deadline:"2026-10-01", url:"https://www.coca-colascholarsfoundation.org"
-  },
-  {
-    id:3, name:"QuestBridge National College Match", org:"QuestBridge",
-    amount:300000, amountStr:"Full 4-Year Scholarship", minGPA:3.5,
-    grades:["12"], categories:["Need-Based","Merit","First-Gen"],
-    desc:"Connects high-achieving, low-income students with full four-year scholarships at top colleges including Yale, Princeton, Stanford, and 45+ others.",
-    deadline:"2026-09-26", url:"https://www.questbridge.org"
-  },
-  {
-    id:4, name:"Jack Kent Cooke Foundation Scholarship", org:"Jack Kent Cooke Foundation",
-    amount:55000, amountStr:"Up to $55,000/year", minGPA:3.5,
-    grades:["12","college"], categories:["Merit","Need-Based","First-Gen"],
-    desc:"One of the largest college scholarships in the U.S. for high-achieving students with financial need. Includes advising and community access.",
-    deadline:"2026-11-05", url:"https://www.jkcf.org"
-  },
-  {
-    id:5, name:"Regeneron Science Talent Search", org:"Regeneron / Society for Science",
-    amount:250000, amountStr:"Up to $250,000", minGPA:0,
-    grades:["12"], categories:["STEM","Research","Merit"],
-    desc:"The nation's most prestigious science and math competition for high school seniors. Students present original research to a panel of scientists.",
-    deadline:"2026-11-12", url:"https://www.societyforscience.org/regeneron-sts"
-  },
-  {
-    id:6, name:"Davidson Fellows Scholarship", org:"Davidson Institute",
-    amount:50000, amountStr:"$10,000–$50,000", minGPA:0,
-    grades:["12","college"], categories:["STEM","Research","Arts","Merit"],
-    desc:"For students 18 and under who complete a significant piece of work in math, science, technology, music, literature, philosophy, or outside the box.",
-    deadline:"2027-02-14", url:"https://www.davidsongifted.org/fellows-scholarship"
-  },
-  {
-    id:7, name:"National Merit Scholarship", org:"National Merit Scholarship Corporation",
-    amount:2500, amountStr:"$2,500+", minGPA:0,
-    grades:["11","12"], categories:["Merit"],
-    desc:"Based on PSAT/NMSQT scores. Finalists compete for Merit Scholarships; many colleges offer additional awards to semifinalists.",
-    deadline:"2027-03-01", url:"https://www.nationalmerit.org"
-  },
-  {
-    id:8, name:"Horatio Alger Scholarship", org:"Horatio Alger Association",
-    amount:25000, amountStr:"$25,000", minGPA:2.0,
-    grades:["12"], categories:["Need-Based","Community"],
-    desc:"For students who have overcome great adversity and demonstrated integrity, perseverance, and leadership in their communities.",
-    deadline:"2026-10-15", url:"https://scholars.horatioalger.org"
-  },
-  {
-    id:9, name:"Elks National Foundation Most Valuable Student", org:"Elks National Foundation",
-    amount:50000, amountStr:"Up to $50,000", minGPA:0,
-    grades:["12"], categories:["Merit","Leadership","Community"],
-    desc:"Awards based on scholarship, leadership, and financial need. Open to U.S. citizens who are high school seniors.",
-    deadline:"2026-11-01", url:"https://www.elks.org/scholars"
-  },
-  {
-    id:10, name:"Dell Scholars Program", org:"Michael & Susan Dell Foundation",
-    amount:20000, amountStr:"$20,000 + support", minGPA:2.4,
-    grades:["12"], categories:["Need-Based","First-Gen"],
-    desc:"More than money — includes a laptop, textbook credits, emergency funds, and dedicated case manager support for first-gen college students.",
-    deadline:"2026-12-01", url:"https://www.dellscholars.org"
-  },
-  {
-    id:11, name:"Hispanic Scholarship Fund", org:"Hispanic Scholarship Fund",
-    amount:5000, amountStr:"$500–$5,000", minGPA:3.0,
-    grades:["12","college"], categories:["Need-Based","Merit"],
-    desc:"Supports Hispanic American students pursuing higher education. Includes career resources, internship opportunities, and mentorship.",
-    deadline:"2027-02-15", url:"https://www.hsf.net"
-  },
-  {
-    id:12, name:"UNCF Scholarships", org:"United Negro College Fund",
-    amount:10000, amountStr:"Varies ($2K–$30K)", minGPA:2.5,
-    grades:["12","college"], categories:["Need-Based","Merit"],
-    desc:"UNCF administers over 400 scholarships and fellowships supporting African American students at HBCUs and other colleges.",
-    deadline:"2026-10-30", url:"https://uncf.org/scholarships"
-  },
-  {
-    id:13, name:"Prudential Spirit of Community Award", org:"Prudential Financial",
-    amount:5000, amountStr:"$1,000–$5,000", minGPA:0,
-    grades:["10","11","12"], categories:["Community","Leadership"],
-    desc:"Honors middle and high school students who have demonstrated exemplary community service in their towns or cities.",
-    deadline:"2026-11-02", url:"https://spirit.prudential.com"
-  },
-  {
-    id:14, name:"AXA Achievement Scholarship", org:"AXA Foundation",
-    amount:25000, amountStr:"$2,500–$25,000", minGPA:0,
-    grades:["12"], categories:["Merit","Leadership","Community"],
-    desc:"Recognizes exceptional seniors who demonstrate outstanding achievement in school, community, or workplace activities.",
-    deadline:"2026-12-15", url:"https://us.axa.com/axa-foundation/scholarship.html"
-  },
-  {
-    id:15, name:"Burger King Scholars", org:"Burger King McLamore Foundation",
-    amount:50000, amountStr:"$1,000–$50,000", minGPA:2.5,
-    grades:["12"], categories:["Need-Based","Merit"],
-    desc:"Open to high school seniors who are employees, children of employees, or dependents of employees of Burger King or its suppliers.",
-    deadline:"2026-12-15", url:"https://bkmclamorefoundation.org"
-  },
-  {
-    id:16, name:"Google Lime Scholarship", org:"Google & Lime Connect",
-    amount:10000, amountStr:"$10,000", minGPA:3.3,
-    grades:["12","college"], categories:["STEM","Need-Based"],
-    desc:"For students with disabilities who are pursuing degrees in computer science, computer engineering, or a closely related technical field.",
-    deadline:"2026-12-10", url:"https://limeconnect.com/opportunities/google-lime-scholarship"
-  },
-  {
-    id:17, name:"American Indian College Fund", org:"American Indian College Fund",
-    amount:5000, amountStr:"$200–$20,000", minGPA:2.5,
-    grades:["12","college"], categories:["Need-Based","Merit"],
-    desc:"Provides scholarships and support for American Indian and Alaska Native students attending tribal colleges and universities.",
-    deadline:"2027-05-31", url:"https://collegefund.org"
-  },
-  {
-    id:18, name:"Asian & Pacific Islander American Scholarship", org:"APIASF",
-    amount:20000, amountStr:"$2,500–$20,000", minGPA:2.7,
-    grades:["12","college"], categories:["Need-Based","Merit","First-Gen"],
-    desc:"The largest non-profit source of college scholarships for Asian Americans and Pacific Islanders in the United States.",
-    deadline:"2027-01-09", url:"https://apiascholars.org"
-  },
-  {
-    id:19, name:"CollegeBoard Opportunity Scholarship", org:"CollegeBoard",
-    amount:40000, amountStr:"$500–$40,000", minGPA:0,
-    grades:["9","10","11","12"], categories:["Merit","First-Gen"],
-    desc:"Students earn scholarship eligibility by completing steps on the BigFuture platform — exploring colleges, completing a FAFSA, and more.",
-    deadline:"2027-05-01", url:"https://opportunity.collegeboard.org"
-  },
-  {
-    id:20, name:"Rotary Foundation Ambassadorial Scholarship", org:"Rotary International",
-    amount:30000, amountStr:"Up to $30,000", minGPA:3.0,
-    grades:["college"], categories:["Leadership","Community","Merit"],
-    desc:"Funds one year of study in any country where there is a Rotary Club. Promotes international understanding and goodwill.",
-    deadline:"2026-11-15", url:"https://www.rotary.org/en/our-programs/scholarships"
-  },
-  {
-    id:21, name:"SkillsUSA Scholarship", org:"SkillsUSA",
-    amount:10000, amountStr:"Up to $10,000", minGPA:0,
-    grades:["12","college"], categories:["STEM","Business","Merit"],
-    desc:"For SkillsUSA members pursuing career and technical education. Awarded based on leadership, community service, and professional skills.",
-    deadline:"2027-02-28", url:"https://www.skillsusa.org/programs/scholarships"
-  },
-  {
-    id:22, name:"National Young Arts Foundation Award", org:"YoungArts",
-    amount:10000, amountStr:"Up to $10,000", minGPA:0,
-    grades:["10","11","12"], categories:["Arts","Merit"],
-    desc:"Recognizes and supports the next generation of artists in visual, literary, design, film, and performing arts. U.S. Citizenship or legal residency required.",
-    deadline:"2026-10-14", url:"https://www.youngarts.org"
-  },
-  {
-    id:23, name:"Tylenol Future Care Scholarship", org:"Tylenol/McNeil Consumer Healthcare",
-    amount:10000, amountStr:"$5,000–$10,000", minGPA:0,
-    grades:["12","college"], categories:["STEM","Merit","Community"],
-    desc:"For students pursuing healthcare-related fields — nursing, medicine, public health, pharmacy, dentistry, and allied health sciences.",
-    deadline:"2026-11-30", url:"https://www.tylenol.com/tylenol-future-care-scholarship"
-  },
-  {
-    id:24, name:"Scholastic Art & Writing Awards", org:"Scholastic Inc.",
-    amount:10000, amountStr:"$1,000–$10,000", minGPA:0,
-    grades:["9","10","11","12"], categories:["Arts","Merit"],
-    desc:"The most prestigious recognition program for creative teens in the U.S. Gold Key winners are eligible for scholarship awards.",
-    deadline:"2026-12-31", url:"https://www.artandwriting.org"
-  },
-  {
-    id:25, name:"Foot Locker Scholar Athletes", org:"Foot Locker Foundation",
-    amount:20000, amountStr:"$5,000–$20,000", minGPA:3.0,
-    grades:["12"], categories:["Athletics","Community","Leadership"],
-    desc:"Recognizes student-athletes who demonstrate excellence on and off the field. 20 winners selected from across the U.S.",
-    deadline:"2026-12-17", url:"https://www.footlockerscholarathletes.com"
-  },
-  {
-    id:26, name:"Dr. Pepper Tuition Giveaway", org:"Dr Pepper Snapple Group",
-    amount:100000, amountStr:"Up to $100,000", minGPA:0,
-    grades:["college"], categories:["Merit"],
-    desc:"Open to current college students who demonstrate passion and drive. Award is based on a talent video submission.",
-    deadline:"2026-09-30", url:"https://www.drpepper.com/en/scholarship"
-  },
-  {
-    id:27, name:"Doodle for Google Scholarship", org:"Google",
-    amount:30000, amountStr:"$30,000", minGPA:0,
-    grades:["9","10","11","12"], categories:["Arts","STEM","Merit"],
-    desc:"Nationwide art competition for K-12 students. One national winner receives a $30,000 scholarship and their art displayed on the Google homepage.",
-    deadline:"2027-03-10", url:"https://doodles.google.com/d4g"
-  },
-  {
-    id:28, name:"Thiel Fellowship", org:"Thiel Foundation",
-    amount:100000, amountStr:"$100,000", minGPA:0,
-    grades:["12","college"], categories:["Business","STEM","Research"],
-    desc:"$100K grant for young people under 23 to skip or leave college to pursue entrepreneurial projects in science, tech, and social innovation.",
-    deadline:"2026-12-31", url:"https://thielfellowship.org"
-  },
-  {
-    id:29, name:"Buick Achievers Scholarship", org:"General Motors / Buick",
-    amount:25000, amountStr:"Up to $25,000/year", minGPA:3.0,
-    grades:["12","college"], categories:["STEM","First-Gen","Need-Based"],
-    desc:"For students pursuing degrees in engineering, technology, design, or business management. Focus on women and minority students in STEM.",
-    deadline:"2027-02-01", url:"https://www.buickachievers.com"
-  },
-  {
-    id:30, name:"Harry S. Truman Scholarship", org:"Truman Scholarship Foundation",
-    amount:30000, amountStr:"$30,000", minGPA:3.0,
-    grades:["college"], categories:["Leadership","Community","Merit"],
-    desc:"For college juniors committed to careers in government or public service. Includes leadership development programming.",
-    deadline:"2027-02-07", url:"https://www.truman.gov"
-  },
-  {
-    id:31, name:"Udall Undergraduate Scholarship", org:"Udall Foundation",
-    amount:7000, amountStr:"$7,000", minGPA:3.0,
-    grades:["college"], categories:["Research","Community","STEM"],
-    desc:"For college sophomores and juniors committed to careers in environment, tribal policy, or Native American health care.",
-    deadline:"2027-03-07", url:"https://udall.gov"
-  },
-  {
-    id:32, name:"Goldwater Scholarship", org:"Barry Goldwater Scholarship Foundation",
-    amount:7500, amountStr:"$7,500/year", minGPA:3.7,
-    grades:["college"], categories:["STEM","Research","Merit"],
-    desc:"Premier scholarship for college students pursuing research careers in natural sciences, mathematics, and engineering.",
-    deadline:"2027-01-26", url:"https://goldwaterscholarship.gov"
-  },
-  {
-    id:33, name:"National Honor Society Scholarship", org:"NASSP",
-    amount:25000, amountStr:"$1,000–$25,000", minGPA:3.5,
-    grades:["12"], categories:["Merit","Leadership","Community"],
-    desc:"Exclusively for NHS members who demonstrate scholarship, service, leadership, and character — four pillars of NHS membership.",
-    deadline:"2027-01-22", url:"https://www.nhs.us/students/nhs-scholarship"
-  },
-  {
-    id:34, name:"Amazon Future Engineer Scholarship", org:"Amazon",
-    amount:40000, amountStr:"$40,000 + internship", minGPA:3.0,
-    grades:["12"], categories:["STEM","Need-Based","First-Gen"],
-    desc:"$40,000 over four years for students from underserved communities studying computer science, plus a guaranteed Amazon internship offer.",
-    deadline:"2027-01-14", url:"https://www.amazonfutureengineer.com/scholarships"
-  },
-  {
-    id:35, name:"Ron Brown Scholars Program", org:"CAP Charitable Foundation",
-    amount:40000, amountStr:"$40,000 ($10K×4 years)", minGPA:3.0,
-    grades:["12"], categories:["Merit","Leadership","Community","Need-Based"],
-    desc:"Comprehensive program for academically talented, highly motivated African American students with demonstrated financial need.",
-    deadline:"2027-01-09", url:"https://ronbrown.org"
-  }
+  { id:1, name:"Gates Scholarship", org:"Bill & Melinda Gates Foundation", amount:200000, amountStr:"Full Ride (~$200K)", minGPA:3.3, grades:["12","college"], categories:["Need-Based","Merit","Leadership"], desc:"Highly competitive scholarship for exceptional, Pell-eligible minority high school seniors. Covers full cost of attendance at any accredited U.S. college.", deadline:"2026-09-15", url:"https://www.thegatesscholarship.org", eligibility:"U.S. citizen or legal permanent resident; high school senior; Pell Grant eligible; member of minority group", requirements:["Transcript","2 short essays","2 recommendations","Financial aid forms"], renewable:true, type:"Full Ride", numAwards:"300 per year" },
+  { id:2, name:"Coca-Cola Scholars Program", org:"Coca-Cola Scholars Foundation", amount:20000, amountStr:"$20,000", minGPA:3.0, grades:["12"], categories:["Merit","Leadership","Community"], desc:"One of the most prestigious scholarships for seniors. 150 scholars selected each year based on academic excellence, leadership, and service.", deadline:"2026-10-01", url:"https://www.coca-colascholarsfoundation.org", eligibility:"High school senior; U.S. citizen, national, or permanent resident", requirements:["Application","Short essays","Recommendations"], renewable:false, type:"Merit", numAwards:"150 per year" },
+  { id:3, name:"QuestBridge National College Match", org:"QuestBridge", amount:300000, amountStr:"Full 4-Year Scholarship", minGPA:3.5, grades:["12"], categories:["Need-Based","Merit","First-Gen"], desc:"Connects high-achieving, low-income students with full four-year scholarships at top colleges including Yale, Princeton, Stanford, and 45+ others.", deadline:"2026-09-26", url:"https://www.questbridge.org", eligibility:"High school senior; household income typically under $65,000; strong academic record", requirements:["Application","Essays","Recommendations","Test scores"], renewable:true, type:"Full Ride", numAwards:"Varies" },
+  { id:4, name:"Jack Kent Cooke Foundation Scholarship", org:"Jack Kent Cooke Foundation", amount:55000, amountStr:"Up to $55,000/year", minGPA:3.5, grades:["12","college"], categories:["Merit","Need-Based","First-Gen"], desc:"One of the largest college scholarships in the U.S. for high-achieving students with financial need. Includes advising and community access.", deadline:"2026-11-05", url:"https://www.jkcf.org", eligibility:"High school senior or transfer student; demonstrated financial need; strong academics", requirements:["Application","Essays","Recommendations","Financial documents"], renewable:true, type:"Renewable Award", numAwards:"~60 per year" },
+  { id:5, name:"Regeneron Science Talent Search", org:"Society for Science", amount:250000, amountStr:"Up to $250,000", minGPA:0, grades:["12"], categories:["STEM","Research","Merit"], desc:"The nation's most prestigious science and math competition for high school seniors. Students present original research to a panel of scientists.", deadline:"2026-11-12", url:"https://www.societyforscience.org/regeneron-sts", eligibility:"High school senior in the U.S., Puerto Rico, or U.S. territories", requirements:["Independent research report","Application","Recommendations from teacher and research mentor"], renewable:false, type:"Competition Prize", numAwards:"40 finalists; top prize $250,000" },
+  { id:6, name:"Davidson Fellows Scholarship", org:"Davidson Institute", amount:50000, amountStr:"$10,000–$50,000", minGPA:0, grades:["12","college"], categories:["STEM","Research","Arts","Merit"], desc:"For students 18 and under who complete a significant piece of work in math, science, technology, music, literature, philosophy, or outside the box.", deadline:"2027-02-14", url:"https://www.davidsongifted.org/fellows-scholarship", eligibility:"U.S. citizen or permanent resident; 18 or under at time of application", requirements:["Completed work sample","Essays","Recommendations"], renewable:false, type:"One-Time Award", numAwards:"20 per year" },
+  { id:7, name:"National Merit Scholarship", org:"National Merit Scholarship Corporation", amount:2500, amountStr:"$2,500+", minGPA:0, grades:["11","12"], categories:["Merit"], desc:"Based on PSAT/NMSQT scores. Finalists compete for Merit Scholarships; many colleges offer additional awards to semifinalists.", deadline:"2027-03-01", url:"https://www.nationalmerit.org", eligibility:"U.S. citizen; 11th grade PSAT/NMSQT test taker; meet academic requirements", requirements:["PSAT/NMSQT score","SAT score","School recommendation","Academic record"], renewable:false, type:"Merit", numAwards:"7,500 per year" },
+  { id:8, name:"Horatio Alger Scholarship", org:"Horatio Alger Association", amount:25000, amountStr:"$25,000", minGPA:2.0, grades:["12"], categories:["Need-Based","Community"], desc:"For students who have overcome great adversity and demonstrated integrity, perseverance, and leadership in their communities.", deadline:"2026-10-15", url:"https://scholars.horatioalger.org", eligibility:"U.S. citizen; high school senior; GPA 2.0+; demonstrated financial need; adversity overcomer", requirements:["Application","Personal statement","Recommendations"], renewable:false, type:"Need-Based", numAwards:"106 per year" },
+  { id:9, name:"Elks Most Valuable Student", org:"Elks National Foundation", amount:50000, amountStr:"Up to $50,000", minGPA:0, grades:["12"], categories:["Merit","Leadership","Community"], desc:"Awards based on scholarship, leadership, and financial need. Open to U.S. citizens who are high school seniors.", deadline:"2026-11-01", url:"https://www.elks.org/scholars", eligibility:"U.S. citizen; high school senior", requirements:["Application","Essays","Recommendations","Transcript"], renewable:true, type:"Merit", numAwards:"500 per year" },
+  { id:10, name:"Dell Scholars Program", org:"Michael & Susan Dell Foundation", amount:20000, amountStr:"$20,000 + support", minGPA:2.4, grades:["12"], categories:["Need-Based","First-Gen"], desc:"More than money — includes a laptop, textbook credits, emergency funds, and dedicated case manager support for first-gen college students.", deadline:"2026-12-01", url:"https://www.dellscholars.org", eligibility:"Completing college readiness program; GPA 2.4+; Pell Grant eligible; first-gen student", requirements:["Application","Short answers","Academic record"], renewable:true, type:"Need-Based", numAwards:"300 per year" },
+  { id:11, name:"Hispanic Scholarship Fund", org:"Hispanic Scholarship Fund", amount:5000, amountStr:"$500–$5,000", minGPA:3.0, grades:["12","college"], categories:["Need-Based","Merit"], desc:"Supports Hispanic American students pursuing higher education. Includes career resources, internship opportunities, and mentorship.", deadline:"2027-02-15", url:"https://www.hsf.net", eligibility:"Hispanic American; GPA 3.0+; U.S. citizen or permanent resident; enrolled or enrolling in college", requirements:["Application","Transcript","FAFSA"], renewable:false, type:"Need-Based Merit", numAwards:"10,000+ per year" },
+  { id:12, name:"UNCF Scholarships", org:"United Negro College Fund", amount:10000, amountStr:"Varies ($2K–$30K)", minGPA:2.5, grades:["12","college"], categories:["Need-Based","Merit"], desc:"UNCF administers over 400 scholarships and fellowships supporting African American students at HBCUs and other colleges.", deadline:"2026-10-30", url:"https://uncf.org/scholarships", eligibility:"African American student; GPA 2.5+; demonstrated financial need", requirements:["Application","Transcript","Essay","Recommendations"], renewable:false, type:"Need-Based", numAwards:"400+ programs" },
+  { id:13, name:"Prudential Spirit of Community Award", org:"Prudential Financial", amount:5000, amountStr:"$1,000–$5,000", minGPA:0, grades:["10","11","12"], categories:["Community","Leadership"], desc:"Honors middle and high school students who have demonstrated exemplary community service in their towns or cities.", deadline:"2026-11-02", url:"https://spirit.prudential.com", eligibility:"Students in grades 5-12; U.S. resident; self-initiated volunteer service", requirements:["Application","Community service description","Principal signature"], renewable:false, type:"Community Service", numAwards:"102 per year" },
+  { id:14, name:"AXA Achievement Scholarship", org:"AXA Foundation", amount:25000, amountStr:"$2,500–$25,000", minGPA:0, grades:["12"], categories:["Merit","Leadership","Community"], desc:"Recognizes exceptional seniors who demonstrate outstanding achievement in school, community, or workplace activities.", deadline:"2026-12-15", url:"https://us.axa.com/axa-foundation/scholarship.html", eligibility:"High school senior; U.S. citizen or permanent resident; plans to enroll in college", requirements:["Application","Activity description","Recommendations"], renewable:false, type:"Achievement", numAwards:"52 per year" },
+  { id:15, name:"Burger King Scholars", org:"Burger King McLamore Foundation", amount:50000, amountStr:"$1,000–$50,000", minGPA:2.5, grades:["12"], categories:["Need-Based","Merit"], desc:"Open to high school seniors who are employees, children of employees, or dependents of employees of Burger King or its suppliers.", deadline:"2026-12-15", url:"https://bkmclamorefoundation.org", eligibility:"BK employee or dependent; GPA 2.5+; high school senior", requirements:["Application","Employment verification","Transcript","Essay"], renewable:false, type:"Employee-Based", numAwards:"35,000+ since inception" },
+  { id:16, name:"Google Lime Scholarship", org:"Google & Lime Connect", amount:10000, amountStr:"$10,000", minGPA:3.3, grades:["12","college"], categories:["STEM","Need-Based"], desc:"For students with disabilities pursuing degrees in computer science, computer engineering, or a closely related technical field.", deadline:"2026-12-10", url:"https://limeconnect.com/opportunities/google-lime-scholarship", eligibility:"Student with disability; GPA 3.3+; pursuing CS/CE degree; U.S./Canadian citizen", requirements:["Application","Essay","Transcript","Disability documentation"], renewable:false, type:"Disability-Based STEM", numAwards:"Varies" },
+  { id:17, name:"American Indian College Fund", org:"American Indian College Fund", amount:5000, amountStr:"$200–$20,000", minGPA:2.5, grades:["12","college"], categories:["Need-Based","Merit"], desc:"Provides scholarships and support for American Indian and Alaska Native students attending tribal colleges and universities.", deadline:"2027-05-31", url:"https://collegefund.org", eligibility:"American Indian or Alaska Native; enrolled or enrolling in tribal college; GPA 2.5+", requirements:["Application","Tribal enrollment verification","Transcript","Essay"], renewable:false, type:"Native American", numAwards:"6,000+ per year" },
+  { id:18, name:"Asian & Pacific Islander American Scholarship", org:"APIASF", amount:20000, amountStr:"$2,500–$20,000", minGPA:2.7, grades:["12","college"], categories:["Need-Based","Merit","First-Gen"], desc:"The largest non-profit source of college scholarships for Asian Americans and Pacific Islanders in the United States.", deadline:"2027-01-09", url:"https://apiascholars.org", eligibility:"Asian American or Pacific Islander; GPA 2.7+; U.S. citizen or permanent resident; demonstrated financial need", requirements:["Application","FAFSA","Essay","Recommendations"], renewable:false, type:"Ethnic Heritage", numAwards:"100+ per year" },
+  { id:19, name:"CollegeBoard Opportunity Scholarship", org:"CollegeBoard", amount:40000, amountStr:"$500–$40,000", minGPA:0, grades:["9","10","11","12"], categories:["Merit","First-Gen"], desc:"Students earn scholarship eligibility by completing steps on the BigFuture platform — exploring colleges, completing a FAFSA, and more.", deadline:"2027-05-01", url:"https://opportunity.collegeboard.org", eligibility:"High school student enrolled in U.S. school; using BigFuture platform", requirements:["BigFuture platform activities","FAFSA completion","College list"], renewable:false, type:"Platform-Based", numAwards:"Multiple per year" },
+  { id:20, name:"Rotary Foundation Ambassadorial Scholarship", org:"Rotary International", amount:30000, amountStr:"Up to $30,000", minGPA:3.0, grades:["college"], categories:["Leadership","Community","Merit","International"], desc:"Funds one year of study in any country where there is a Rotary Club. Promotes international understanding and goodwill.", deadline:"2026-11-15", url:"https://www.rotary.org/en/our-programs/scholarships", eligibility:"College student; GPA 3.0+; community involvement; apply through local Rotary Club", requirements:["Application","Rotary Club recommendation","Language proficiency","Essays"], renewable:false, type:"International Study", numAwards:"Varies by district" },
+  { id:21, name:"SkillsUSA Scholarship", org:"SkillsUSA", amount:10000, amountStr:"Up to $10,000", minGPA:0, grades:["12","college"], categories:["STEM","Business","Merit"], desc:"For SkillsUSA members pursuing career and technical education. Awarded based on leadership, community service, and professional skills.", deadline:"2027-02-28", url:"https://www.skillsusa.org/programs/scholarships", eligibility:"SkillsUSA member; pursuing CTE program", requirements:["SkillsUSA membership","Application","Essay","Recommendations"], renewable:false, type:"CTE/Vocational", numAwards:"Various" },
+  { id:22, name:"National Young Arts Foundation Award", org:"YoungArts", amount:10000, amountStr:"Up to $10,000", minGPA:0, grades:["10","11","12"], categories:["Arts","Merit"], desc:"Recognizes and supports the next generation of artists in visual, literary, design, film, and performing arts. U.S. Citizenship or legal residency required.", deadline:"2026-10-14", url:"https://www.youngarts.org", eligibility:"U.S. citizen or permanent resident; 15-18 years old; pursuing arts", requirements:["Art portfolio or performance submission","Application","Short essay"], renewable:false, type:"Arts Competition", numAwards:"900 per year" },
+  { id:23, name:"Tylenol Future Care Scholarship", org:"McNeil Consumer Healthcare", amount:10000, amountStr:"$5,000–$10,000", minGPA:0, grades:["12","college"], categories:["STEM","Merit","Community"], desc:"For students pursuing healthcare-related fields — nursing, medicine, public health, pharmacy, dentistry, and allied health sciences.", deadline:"2026-11-30", url:"https://www.tylenol.com/tylenol-future-care-scholarship", eligibility:"Pursuing healthcare degree; U.S. college student or incoming freshman", requirements:["Application","Essay","Transcript"], renewable:false, type:"Healthcare", numAwards:"10 per year" },
+  { id:24, name:"Scholastic Art & Writing Awards", org:"Scholastic Inc.", amount:10000, amountStr:"$1,000–$10,000", minGPA:0, grades:["9","10","11","12"], categories:["Arts","Writing","Merit"], desc:"The most prestigious recognition program for creative teens in the U.S. Gold Key winners are eligible for scholarship awards.", deadline:"2026-12-31", url:"https://www.artandwriting.org", eligibility:"U.S. student in grades 7-12; submit original art or writing", requirements:["Original artwork or writing submission","Application"], renewable:false, type:"Arts/Writing", numAwards:"Hundreds per year" },
+  { id:25, name:"Foot Locker Scholar Athletes", org:"Foot Locker Foundation", amount:20000, amountStr:"$5,000–$20,000", minGPA:3.0, grades:["12"], categories:["Athletics","Community","Leadership"], desc:"Recognizes student-athletes who demonstrate excellence on and off the field. 20 winners selected from across the U.S.", deadline:"2026-12-17", url:"https://www.footlockerscholarathletes.com", eligibility:"High school senior; varsity athlete; GPA 3.0+; community involvement", requirements:["Application","Athletic record","Transcript","Essay","Recommendations"], renewable:false, type:"Athletic Merit", numAwards:"20 per year" },
+  { id:26, name:"Dr. Pepper Tuition Giveaway", org:"Dr Pepper Snapple Group", amount:100000, amountStr:"Up to $100,000", minGPA:0, grades:["college"], categories:["Merit"], desc:"Open to current college students who demonstrate passion and drive. Award is based on a talent video submission.", deadline:"2026-09-30", url:"https://www.drpepper.com/en/scholarship", eligibility:"Current college student; legal U.S. resident; 18+", requirements:["Talent video submission","Application"], renewable:false, type:"Competition", numAwards:"3 per year" },
+  { id:27, name:"Doodle for Google Scholarship", org:"Google", amount:30000, amountStr:"$30,000", minGPA:0, grades:["9","10","11","12"], categories:["Arts","STEM","Merit"], desc:"Nationwide art competition for K-12 students. One national winner receives a $30,000 scholarship and their art displayed on the Google homepage.", deadline:"2027-03-10", url:"https://doodles.google.com/d4g", eligibility:"K-12 student enrolled in U.S. school", requirements:["Original doodle submission","Parent/guardian consent","Application"], renewable:false, type:"Art Competition", numAwards:"1 national winner + state winners" },
+  { id:28, name:"Thiel Fellowship", org:"Thiel Foundation", amount:100000, amountStr:"$100,000", minGPA:0, grades:["12","college"], categories:["Business","STEM","Research"], desc:"$100K grant for young people under 23 to skip or leave college to pursue entrepreneurial projects in science, tech, and social innovation.", deadline:"2026-12-31", url:"https://thielfellowship.org", eligibility:"Under 23 years old; ambitious project in STEM, entrepreneurship, or social innovation", requirements:["Project proposal","Application","Interviews"], renewable:false, type:"Entrepreneurship Fellowship", numAwards:"20-25 per year" },
+  { id:29, name:"Buick Achievers Scholarship", org:"General Motors / Buick", amount:25000, amountStr:"Up to $25,000/year", minGPA:3.0, grades:["12","college"], categories:["STEM","First-Gen","Need-Based"], desc:"For students pursuing degrees in engineering, technology, design, or business management. Focus on women and minority students in STEM.", deadline:"2027-02-01", url:"https://www.buickachievers.com", eligibility:"GPA 3.0+; pursuing STEM/business degree; demonstrated financial need", requirements:["Application","Transcript","Essay","Recommendations"], renewable:true, type:"STEM", numAwards:"100 per year" },
+  { id:30, name:"Harry S. Truman Scholarship", org:"Truman Scholarship Foundation", amount:30000, amountStr:"$30,000", minGPA:3.0, grades:["college"], categories:["Leadership","Community","Merit"], desc:"For college juniors committed to careers in government or public service. Includes leadership development programming.", deadline:"2027-02-07", url:"https://www.truman.gov", eligibility:"College junior; U.S. citizen; GPA 3.0+; committed to public service career", requirements:["Faculty nomination","Application","Essays","Recommendations"], renewable:false, type:"Public Service", numAwards:"55-60 per year" },
+  { id:31, name:"Udall Undergraduate Scholarship", org:"Udall Foundation", amount:7000, amountStr:"$7,000", minGPA:3.0, grades:["college"], categories:["Research","Community","STEM"], desc:"For college sophomores and juniors committed to careers in environment, tribal policy, or Native American health care.", deadline:"2027-03-07", url:"https://udall.gov", eligibility:"College sophomore or junior; U.S. citizen or permanent resident; environmental or Native affairs career focus", requirements:["Institution nomination","Application","Essays","Recommendations"], renewable:false, type:"Environment/Tribal", numAwards:"80 per year" },
+  { id:32, name:"Goldwater Scholarship", org:"Barry Goldwater Scholarship Foundation", amount:7500, amountStr:"$7,500/year", minGPA:3.7, grades:["college"], categories:["STEM","Research","Merit"], desc:"Premier scholarship for college students pursuing research careers in natural sciences, mathematics, and engineering.", deadline:"2027-01-26", url:"https://goldwaterscholarship.gov", eligibility:"College sophomore or junior; GPA 3.7+; U.S. citizen; STEM research career intent", requirements:["Institution nomination","Research essay","Recommendations","Transcript"], renewable:true, type:"STEM Research", numAwards:"400 per year" },
+  { id:33, name:"National Honor Society Scholarship", org:"NASSP", amount:25000, amountStr:"$1,000–$25,000", minGPA:3.5, grades:["12"], categories:["Merit","Leadership","Community"], desc:"Exclusively for NHS members who demonstrate scholarship, service, leadership, and character — four pillars of NHS membership.", deadline:"2027-01-22", url:"https://www.nhs.us/students/nhs-scholarship", eligibility:"NHS member; high school senior; GPA 3.5+", requirements:["NHS membership verification","Application","Essay","Recommendations"], renewable:false, type:"Merit", numAwards:"575 per year" },
+  { id:34, name:"Amazon Future Engineer Scholarship", org:"Amazon", amount:40000, amountStr:"$40,000 + internship", minGPA:3.0, grades:["12"], categories:["STEM","Need-Based","First-Gen"], desc:"$40,000 over four years for students from underserved communities studying computer science, plus a guaranteed Amazon internship offer.", deadline:"2027-01-14", url:"https://www.amazonfutureengineer.com/scholarships", eligibility:"High school senior from underserved community; GPA 3.0+; pursuing CS degree", requirements:["Application","Essay","Transcript","Financial documentation"], renewable:true, type:"STEM / Corporate", numAwards:"400 per year" },
+  { id:35, name:"Ron Brown Scholars Program", org:"CAP Charitable Foundation", amount:40000, amountStr:"$40,000 ($10K×4 years)", minGPA:3.0, grades:["12"], categories:["Merit","Leadership","Community","Need-Based"], desc:"Comprehensive program for academically talented, highly motivated African American students with demonstrated financial need.", deadline:"2027-01-09", url:"https://ronbrown.org", eligibility:"African American high school senior; GPA 3.0+; demonstrated financial need; leadership", requirements:["Application","Essays","Recommendations","Interview (finalists)"], renewable:true, type:"Need-Based Merit", numAwards:"10-20 per year" },
+  { id:36, name:"Fulbright U.S. Student Program", org:"U.S. Department of State", amount:20000, amountStr:"Full funding (varies)", minGPA:3.0, grades:["college"], categories:["International","Research","Merit"], desc:"Funds graduate study, research, or English teaching abroad. One of the most prestigious fellowships for U.S. college graduates and graduate students.", deadline:"2026-10-14", url:"https://us.fulbrightonline.org", eligibility:"U.S. citizen; bachelor's degree by start of grant; strong academic record; project proposal", requirements:["Project proposal","Essays","Recommendations","Language evaluation"], renewable:false, type:"International Fellowship", numAwards:"2,000+ per year" },
+  { id:37, name:"Rhodes Scholarship", org:"Rhodes Trust", amount:80000, amountStr:"Full Oxford funding (~$80K)", minGPA:3.7, grades:["college"], categories:["Merit","Leadership","Research","International"], desc:"The most prestigious international scholarship for study at the University of Oxford. Selects students who show intellectual distinction, leadership, and commitment to service.", deadline:"2026-10-01", url:"https://www.rhodesscholarship.org", eligibility:"U.S. citizen; 18-24 years old; bachelor's degree; exceptional academic and leadership record", requirements:["Institution endorsement","Essays","Recommendations","Interview"], renewable:true, type:"International Fellowship", numAwards:"32 U.S. scholars per year" },
+  { id:38, name:"Schwarzman Scholars", org:"Schwarzman Scholars Program", amount:60000, amountStr:"Full Tsinghua funding", minGPA:3.5, grades:["college"], categories:["Merit","Leadership","International","Business"], desc:"One-year master's degree at Tsinghua University in Beijing. Designed to prepare future global leaders who understand China.", deadline:"2026-09-22", url:"https://www.schwarzmanscholars.org", eligibility:"21-28 years old; bachelor's degree; exceptional leadership; interest in China-U.S. relations", requirements:["Application","Essays","Recommendations","Interview (finalists)"], renewable:false, type:"International Fellowship", numAwards:"200 globally per year" },
+  { id:39, name:"Marshall Scholarship", org:"Marshall Aid Commemoration Commission", amount:50000, amountStr:"Full UK study funding", minGPA:3.7, grades:["college"], categories:["Merit","Research","International","Leadership"], desc:"Funds two years of graduate study at any British university. One of America's most competitive international scholarships.", deadline:"2026-10-01", url:"https://www.marshallscholarship.org", eligibility:"U.S. citizen; GPA 3.7+; bachelor's degree; under 26 at time of application", requirements:["Institution endorsement","Essays","Recommendations","Interview"], renewable:true, type:"International Fellowship", numAwards:"40 per year" },
+  { id:40, name:"Churchill Scholarship", org:"Winston Churchill Foundation", amount:60000, amountStr:"Full Cambridge funding", minGPA:3.7, grades:["college"], categories:["STEM","Research","International","Merit"], desc:"Funds one year of graduate study in STEM at Churchill College, University of Cambridge. Highly competitive.", deadline:"2026-11-01", url:"https://www.churchillscholarship.org", eligibility:"U.S. citizen; 18-26 years old; GPA 3.7+; STEM field; institution must be Churchill affiliate", requirements:["Institution nomination","Research statement","Recommendations","Transcript"], renewable:false, type:"International STEM", numAwards:"16 per year" },
+  { id:41, name:"Knight-Hennessy Scholars", org:"Stanford University", amount:90000, amountStr:"Full Stanford graduate funding", minGPA:3.5, grades:["college"], categories:["Merit","Leadership","Research","Business"], desc:"Fully funded graduate education at Stanford for students who demonstrate leadership potential and interest in addressing the world's greatest challenges.", deadline:"2026-10-12", url:"https://knight-hennessy.stanford.edu", eligibility:"Bachelor's degree by enrollment; admitted to Stanford graduate program; strong leadership", requirements:["Stanford graduate admission","Application","Essays","Recommendations"], renewable:true, type:"Graduate Fellowship", numAwards:"100 per year" },
+  { id:42, name:"Paul & Daisy Soros Fellowships", org:"Paul & Daisy Soros Foundation", amount:90000, amountStr:"Up to $90,000", minGPA:0, grades:["college"], categories:["Merit","First-Gen","International","Leadership"], desc:"For New Americans — immigrants and children of immigrants — who are pursuing graduate study in the U.S. 30 Fellows chosen annually.", deadline:"2026-11-01", url:"https://www.pdsoros.org", eligibility:"New American (immigrant or child of immigrants); pursuing U.S. graduate education; under 30", requirements:["Application","Essays","Recommendations","Interview (finalists)"], renewable:true, type:"Graduate Fellowship", numAwards:"30 per year" },
+  { id:43, name:"SMART Scholarship", org:"U.S. Department of Defense", amount:45000, amountStr:"Full tuition + stipend", minGPA:3.0, grades:["12","college"], categories:["STEM","Research","Merit"], desc:"Scholarship for Service program for students pursuing STEM degrees. Recipients receive full tuition, a stipend, and must work for DoD after graduation.", deadline:"2026-12-01", url:"https://www.smartscholarship.org", eligibility:"U.S. citizen; GPA 3.0+; pursuing STEM degree; willing to work for DoD after graduation", requirements:["Application","Essay","Transcript","Recommendations"], renewable:true, type:"Scholarship for Service", numAwards:"400 per year" },
+  { id:44, name:"Boren Awards for International Study", org:"National Security Education Program", amount:25000, amountStr:"Up to $25,000", minGPA:3.0, grades:["college"], categories:["International","Research","Merit","Leadership"], desc:"Supports study abroad in regions critical to U.S. national security. Recipients agree to work in federal service after graduation.", deadline:"2027-01-28", url:"https://www.borenawards.org", eligibility:"U.S. citizen; studying critical language; committed to national security career", requirements:["Application","Essays","Recommendations","Study plan"], renewable:false, type:"Study Abroad", numAwards:"200 per year" },
+  { id:45, name:"Critical Language Scholarship", org:"U.S. Department of State", amount:10000, amountStr:"Full funding (summer)", minGPA:0, grades:["college"], categories:["International","Merit"], desc:"Fully-funded intensive summer language institutes overseas for U.S. students. Offered in 15 critical need languages.", deadline:"2026-11-17", url:"https://clscholarship.org", eligibility:"U.S. citizen; 18+; enrolled in U.S. college; studying critical language", requirements:["Application","Language background statement","Recommendations"], renewable:false, type:"Language Study", numAwards:"550 per year" },
+  { id:46, name:"Gilman International Scholarship", org:"U.S. Department of State", amount:5000, amountStr:"Up to $5,000", minGPA:0, grades:["college"], categories:["International","Need-Based","First-Gen"], desc:"Supports study abroad for U.S. undergraduates with demonstrated financial need who might not otherwise have the opportunity to study abroad.", deadline:"2027-03-03", url:"https://www.gilmanscholarship.org", eligibility:"U.S. citizen; Pell Grant recipient; studying abroad minimum 4 weeks", requirements:["Application","Statement of purpose","Recommendation","Adviser certification"], renewable:false, type:"Study Abroad", numAwards:"2,800 per year" },
+  { id:47, name:"Jackie Robinson Foundation Scholarship", org:"Jackie Robinson Foundation", amount:30000, amountStr:"Up to $30,000 ($7.5K×4)", minGPA:3.0, grades:["12"], categories:["Merit","Leadership","Community","Need-Based"], desc:"Multi-year award for minority students demonstrating leadership potential, academic excellence, and financial need. Includes mentoring and networking.", deadline:"2027-02-01", url:"https://www.jackierobinson.org", eligibility:"Minority high school senior; GPA 3.0+; demonstrated financial need; leadership", requirements:["Application","Essays","Recommendations","SAT/ACT scores"], renewable:true, type:"Need-Based Merit", numAwards:"60 per year" },
+  { id:48, name:"Point Foundation Scholarship", org:"Point Foundation", amount:14000, amountStr:"Avg $14,000/year", minGPA:3.0, grades:["12","college"], categories:["Merit","Leadership","Community","Need-Based"], desc:"The nation's largest scholarship fund for LGBTQ+ students. Includes mentoring, leadership retreats, and a community of scholars.", deadline:"2027-01-10", url:"https://pointfoundation.org", eligibility:"LGBTQ+ identifying student; GPA 3.0+; demonstrated financial need; leadership potential", requirements:["Application","Essays","Recommendations","Financial need documentation"], renewable:true, type:"Identity-Based Merit", numAwards:"30 per year" },
+  { id:49, name:"Society of Women Engineers Scholarship", org:"Society of Women Engineers", amount:15000, amountStr:"$1,000–$15,000", minGPA:3.0, grades:["12","college"], categories:["STEM","Merit","Leadership"], desc:"Over $1 million in scholarships awarded annually to women pursuing engineering and engineering technology degrees.", deadline:"2026-10-07", url:"https://scholarships.swe.org", eligibility:"Woman identifying student; pursuing engineering/technology degree; GPA 3.0+", requirements:["Application","Essays","Transcript","Recommendations"], renewable:false, type:"STEM/Women", numAwards:"260+ per year" },
+  { id:50, name:"NSBE Scholarship", org:"National Society of Black Engineers", amount:5000, amountStr:"$500–$5,000", minGPA:3.0, grades:["12","college"], categories:["STEM","Merit","Community"], desc:"NSBE offers numerous scholarships to Black students pursuing STEM degrees. Membership encourages professional development and community.", deadline:"2027-01-15", url:"https://www.nsbe.org/programs/scholarships", eligibility:"Black/African American; pursuing STEM degree; NSBE member or willing to join; GPA 3.0+", requirements:["NSBE membership","Application","Transcript","Essay"], renewable:false, type:"STEM/Diversity", numAwards:"Multiple annually" },
+  { id:51, name:"SHPE Scholarship", org:"Society of Hispanic Professional Engineers", amount:5000, amountStr:"$1,000–$5,000", minGPA:3.0, grades:["12","college"], categories:["STEM","Merit","Community"], desc:"Supports Hispanic students in STEM fields through scholarships, mentoring, and professional development opportunities.", deadline:"2027-04-01", url:"https://www.shpe.org/scholarships", eligibility:"Hispanic/Latino; pursuing STEM degree; GPA 3.0+; SHPE member", requirements:["SHPE membership","Application","Transcript","Essay"], renewable:false, type:"STEM/Diversity", numAwards:"Various" },
+  { id:52, name:"AISES Scholarship", org:"American Indian Science & Engineering Society", amount:2500, amountStr:"$1,000–$2,500", minGPA:3.0, grades:["12","college"], categories:["STEM","Merit","Community"], desc:"For American Indian, Alaska Native, Native Hawaiian, Pacific Islander, and Indigenous Canadian students pursuing STEM degrees.", deadline:"2026-12-31", url:"https://www.aises.org/scholarships", eligibility:"Indigenous student; pursuing STEM degree; AISES member; GPA 3.0+", requirements:["AISES membership","Application","Transcript","Essay","Tribal enrollment documentation"], renewable:false, type:"Native STEM", numAwards:"Various" },
+  { id:53, name:"Congressional Hispanic Caucus Institute Scholarship", org:"CHCI", amount:5000, amountStr:"$2,500–$5,000", minGPA:3.0, grades:["12","college"], categories:["Merit","Leadership","Community"], desc:"CHCI awards scholarships to Latino students who demonstrate strong leadership potential and commitment to community service.", deadline:"2027-04-15", url:"https://chci.org/scholarships", eligibility:"Latino; U.S. citizen or permanent resident; GPA 3.0+; community involvement", requirements:["Application","Essay","Transcript","Recommendations"], renewable:false, type:"Civic Leadership", numAwards:"Various" },
+  { id:54, name:"NAACP Scholarships", org:"NAACP", amount:4000, amountStr:"$2,000–$4,000", minGPA:2.5, grades:["12","college"], categories:["Merit","Community","Need-Based"], desc:"NAACP provides various scholarships for African American students who are NAACP members, recognizing academic achievement and civil rights commitment.", deadline:"2027-03-26", url:"https://www.naacp.org/naacp-scholarships", eligibility:"African American; NAACP member; GPA 2.5+; U.S. citizen", requirements:["NAACP membership","Application","Transcript","Essay","Financial need documentation"], renewable:false, type:"Civil Rights/Community", numAwards:"Various" },
+  { id:55, name:"Pat Tillman Foundation Scholarship", org:"Pat Tillman Foundation", amount:11000, amountStr:"Avg $11,000/year", minGPA:0, grades:["college"], categories:["Merit","Leadership","Community"], desc:"For military veterans, active duty service members, and their spouses or dependents who exemplify Pat Tillman's character and service.", deadline:"2027-02-01", url:"https://pattillmanfoundation.org", eligibility:"U.S. military veteran, active duty, or spouse/dependent; enrolled in college; strong leadership", requirements:["Military service documentation","Application","Essays","Recommendations"], renewable:true, type:"Military Service", numAwards:"60 per year" },
+  { id:56, name:"Posse Foundation Scholarship", org:"Posse Foundation", amount:200000, amountStr:"Full tuition (~$200K)", minGPA:0, grades:["12"], categories:["Merit","Leadership","First-Gen","Community"], desc:"Selects public high school students from major cities and sends them to partner colleges in groups (posses) with full-tuition scholarships.", deadline:"2026-10-30", url:"https://www.possefoundation.org", eligibility:"Public high school senior in participating cities; demonstrated leadership; nominated through Posse process", requirements:["Nomination","Interviews","Group assessment"], renewable:true, type:"Full Tuition", numAwards:"900 per year" },
+  { id:57, name:"VFW Voice of Democracy Scholarship", org:"Veterans of Foreign Wars", amount:30000, amountStr:"Up to $30,000", minGPA:0, grades:["10","11","12"], categories:["Writing","Merit","Community"], desc:"Audio-essay competition for high school students in grades 9-12. Students record a 3-5 minute essay on a patriotic theme.", deadline:"2026-10-31", url:"https://www.vfw.org/VOD", eligibility:"High school student grades 9-12; U.S. citizen or national; not a previous national winner", requirements:["3-5 minute audio essay","Local VFW post submission"], renewable:false, type:"Essay/Patriotic", numAwards:"54 national winners" },
+  { id:58, name:"Optimist International Essay Contest", org:"Optimist International", amount:2500, amountStr:"$2,500", minGPA:0, grades:["10","11","12"], categories:["Writing","Merit"], desc:"Students write an essay on an optimism-related prompt. Judged at club, district, and international levels.", deadline:"2027-03-01", url:"https://www.optimist.org/member/scholarships3.cfm", eligibility:"Under 19 years old; participate through local Optimist Club", requirements:["800-word essay","Local club participation"], renewable:false, type:"Essay Competition", numAwards:"Various at each level" },
+  { id:59, name:"National FFA Scholarship", org:"National FFA Organization", amount:25000, amountStr:"$300–$25,000", minGPA:0, grades:["12"], categories:["Community","Merit","STEM"], desc:"Over $3 million in scholarships awarded each year to FFA members pursuing agriculture, food, and natural resources degrees.", deadline:"2027-02-01", url:"https://www.ffa.org/scholarships", eligibility:"FFA member; pursuing agriculture/natural resources degree", requirements:["FFA membership","Application","Essay","Recommendations"], renewable:false, type:"Agriculture/CTE", numAwards:"2,000+ per year" },
+  { id:60, name:"Daughters of the American Revolution Scholarship", org:"DAR", amount:5000, amountStr:"$2,000–$5,000", minGPA:3.0, grades:["12","college"], categories:["Merit","Need-Based","STEM"], desc:"The DAR offers many scholarships across fields including nursing, medicine, history, and American history. Administered through local chapters.", deadline:"2027-02-15", url:"https://www.dar.org/national-society/scholarships", eligibility:"U.S. citizen; GPA 3.0+; meet specific program requirements", requirements:["DAR member endorsement","Application","Essay","Transcript"], renewable:false, type:"Heritage/Merit", numAwards:"Various" },
+  { id:61, name:"American Legion Scholarship", org:"American Legion", amount:20000, amountStr:"$1,000–$20,000", minGPA:0, grades:["10","11","12","college"], categories:["Merit","Community","Need-Based"], desc:"American Legion offers multiple scholarships for dependents and descendants of veterans, as well as general merit programs.", deadline:"2027-03-01", url:"https://www.legion.org/scholarships", eligibility:"Dependent or descendant of U.S. veteran; U.S. citizen", requirements:["Application","Essay","Proof of relationship to veteran"], renewable:false, type:"Veterans/Military", numAwards:"Various" },
+  { id:62, name:"Bonner Scholars Program", org:"Bonner Foundation", amount:15000, amountStr:"$2,500–$4,000/year", minGPA:0, grades:["12"], categories:["Community","Leadership","Need-Based"], desc:"Combines significant financial aid with a four-year community service commitment at partner colleges. Transforms college into a civic experience.", deadline:"2027-01-15", url:"https://bonner.org", eligibility:"High school senior; demonstrated financial need; commitment to community service; admitted to Bonner partner college", requirements:["College application","Bonner application","Community service documentation"], renewable:true, type:"Service-Based", numAwards:"1,500+ scholars active" },
+  { id:63, name:"American Chemical Society Scholars", org:"American Chemical Society", amount:5000, amountStr:"$2,500–$5,000", minGPA:3.0, grades:["12","college"], categories:["STEM","Merit","Need-Based"], desc:"For underrepresented minority students pursuing chemistry or chemistry-related degrees. Supported by ACS and corporate sponsors.", deadline:"2027-03-01", url:"https://www.acs.org/scholars", eligibility:"African American, Hispanic, or American Indian; pursuing chemistry degree; GPA 3.0+; demonstrated financial need", requirements:["Application","Transcript","Recommendations","Financial documentation"], renewable:true, type:"STEM/Diversity", numAwards:"100+ per year" },
+  { id:64, name:"Zonta International Amelia Earhart Fellowship", org:"Zonta International", amount:10000, amountStr:"$10,000", minGPA:0, grades:["college"], categories:["STEM","Research","Merit"], desc:"Annual fellowships awarded to women pursuing Ph.D./doctoral degrees in aerospace-related sciences and aerospace engineering.", deadline:"2026-11-15", url:"https://www.zonta.org/Web/Programs/Education/Amelia_Earhart_Fellowship", eligibility:"Woman; pursuing doctoral degree in aerospace field; strong academic record", requirements:["Application","Transcript","Recommendations","Research description"], renewable:false, type:"STEM/Women", numAwards:"30 per year" },
+  { id:65, name:"AAUW Educational Foundation Fellowships", org:"American Association of University Women", amount:20000, amountStr:"$6,000–$20,000", minGPA:0, grades:["college"], categories:["Merit","Research","STEM"], desc:"AAUW awards fellowships for women pursuing graduate or postgraduate education in the U.S. and fellowships for women scholars worldwide.", deadline:"2026-11-15", url:"https://www.aauw.org/resources/programs/fellowships-grants", eligibility:"Woman identifying; pursuing graduate study; U.S. citizen or permanent resident", requirements:["Application","Essays","Recommendations","Transcript"], renewable:false, type:"Graduate/Women", numAwards:"200+ per year" },
+  { id:66, name:"P.E.O. International Peace Scholarship", org:"P.E.O. International", amount:12500, amountStr:"Up to $12,500", minGPA:0, grades:["college"], categories:["International","Merit","Research"], desc:"For women from outside the U.S. and Canada pursuing graduate degrees at accredited U.S. or Canadian institutions.", deadline:"2026-12-15", url:"https://www.peointernational.org/about-peo-international-peace-scholarship", eligibility:"Woman; international student (not U.S./Canadian citizen); pursuing graduate degree in U.S. or Canada", requirements:["Application","Transcript","Proof of enrollment","Recommendations"], renewable:true, type:"International/Women", numAwards:"175 per year" },
+  { id:67, name:"Tyson Foods Scholarship", org:"Tyson Foods", amount:5000, amountStr:"$2,000–$5,000", minGPA:2.5, grades:["12"], categories:["Need-Based","Merit","Community"], desc:"Supports children of Tyson Foods employees pursuing higher education. Focus on food science, agriculture, and business.", deadline:"2027-02-28", url:"https://www.tysonfoods.com/news/our-story/community/tyson-foods-scholarship", eligibility:"Child of Tyson Foods employee; high school senior; GPA 2.5+", requirements:["Application","Employment verification","Transcript","Essay"], renewable:false, type:"Employee-Based", numAwards:"250+ per year" },
+  { id:68, name:"Target All-Around Scholarship", org:"Target Corporation", amount:10000, amountStr:"Up to $10,000", minGPA:0, grades:["12"], categories:["Merit","Community","Need-Based"], desc:"Celebrates well-rounded students who balance academics, community service, and leadership. Part of Target's community giving.", deadline:"2027-03-01", url:"https://corporate.target.com/corporate-responsibility/community/giving/scholarships", eligibility:"High school senior; U.S. citizen; well-rounded in academics, service, and leadership", requirements:["Application","Essay","Recommendations","Transcript"], renewable:false, type:"Well-Rounded", numAwards:"Various" },
+  { id:69, name:"Walmart Associate Scholarship", org:"Walmart Foundation", amount:16000, amountStr:"Up to $16,000", minGPA:0, grades:["12","college"], categories:["Need-Based","Merit"], desc:"For Walmart and Sam's Club associates pursuing higher education. Provides academic and financial support for store employees.", deadline:"2027-01-31", url:"https://foundation.walmart.com/scholarships", eligibility:"Walmart or Sam's Club associate; U.S. citizen; pursuing accredited degree", requirements:["Employment verification","Application","Essay","Recommendations"], renewable:true, type:"Employee-Based", numAwards:"Varies" },
+  { id:70, name:"Chick-fil-A Remarkable Futures Scholarship", org:"Chick-fil-A", amount:25000, amountStr:"$1,000–$25,000", minGPA:2.5, grades:["12","college"], categories:["Merit","Community","Leadership"], desc:"Awarded to Chick-fil-A restaurant team members who demonstrate leadership, scholarship, and community involvement.", deadline:"2027-02-01", url:"https://www.chick-fil-a.com/remarkable-futures-scholarship", eligibility:"Chick-fil-A team member; GPA 2.5+; community involvement; leadership", requirements:["Employment verification","Application","Essay","Recommendations"], renewable:false, type:"Employee Merit", numAwards:"2,400+ since inception" },
+  { id:71, name:"National Society of Black Engineers Pre-College Scholarship", org:"NSBE Jr.", amount:3000, amountStr:"$1,000–$3,000", minGPA:2.5, grades:["9","10","11","12"], categories:["STEM","Merit","Community"], desc:"For NSBE Jr. Chapter members in high school demonstrating academic excellence and interest in STEM careers.", deadline:"2027-01-31", url:"https://nsbe.org/nsbe-jr", eligibility:"NSBE Jr. member; high school student; GPA 2.5+; STEM interest", requirements:["NSBE Jr. membership","Application","Transcript","Essay"], renewable:false, type:"Pre-College STEM", numAwards:"Various" },
+  { id:72, name:"Siemens Competition in Math, Science & Technology", org:"Siemens Foundation", amount:100000, amountStr:"Up to $100,000", minGPA:0, grades:["12"], categories:["STEM","Research","Merit"], desc:"Recognizes exemplary research projects by individual students and teams. Winners present research to panels of distinguished scientists.", deadline:"2026-09-30", url:"https://www.discoveryeducation.com/siemens", eligibility:"High school senior; U.S. resident; independent or team research project in STEM", requirements:["Research report","Application","Teacher recommendation"], renewable:false, type:"STEM Competition", numAwards:"Various regional + national" },
+  { id:73, name:"Appalachian Regional Commission Scholarship", org:"Appalachian Regional Commission", amount:7500, amountStr:"Up to $7,500", minGPA:3.0, grades:["12","college"], categories:["Need-Based","STEM","Merit"], desc:"For students from Appalachian counties pursuing science, technology, engineering, math, or entrepreneurship.", deadline:"2027-03-15", url:"https://www.arc.gov", eligibility:"Resident of Appalachian county; pursuing STEM or entrepreneurship degree; GPA 3.0+; financial need", requirements:["Application","Transcript","Financial documentation","Essay"], renewable:false, type:"Regional Need-Based", numAwards:"Various" },
+  { id:74, name:"American Meteorological Society Scholarship", org:"AMS", amount:10000, amountStr:"$2,000–$10,000", minGPA:3.25, grades:["12","college"], categories:["STEM","Research","Merit"], desc:"For students pursuing degrees in atmospheric, oceanic, or hydrologic sciences. Multiple scholarships available through AMS.", deadline:"2027-02-01", url:"https://www.ametsoc.org/index.cfm/ams/information-for/students/ams-scholarships-and-fellowships", eligibility:"Pursuing atmospheric/oceanic/hydrologic science degree; GPA 3.25+; U.S. citizen or permanent resident", requirements:["Application","Transcript","Recommendations","Essay"], renewable:false, type:"Atmospheric Science", numAwards:"Various" },
+  { id:75, name:"Math Prize for Girls", org:"Advantage Testing Foundation", amount:55000, amountStr:"Up to $55,000", minGPA:0, grades:["9","10","11","12"], categories:["STEM","Merit"], desc:"Annual math competition for high school girls at MIT. Top performers earn scholarships to encourage women in mathematics.", deadline:"2026-09-15", url:"https://mathprize.atfdn.org", eligibility:"Girl in grades 9-12; U.S. or Canadian student; strong math background", requirements:["Registration","Math competition participation"], renewable:false, type:"Math Competition", numAwards:"Top 10 winners" },
+  { id:76, name:"Congressional Black Caucus Foundation Scholarships", org:"Congressional Black Caucus Foundation", amount:8000, amountStr:"$2,000–$8,000", minGPA:2.5, grades:["12","college"], categories:["Merit","Community","Leadership","Need-Based"], desc:"CBCF awards scholarships to African American students who demonstrate academic achievement and commitment to service.", deadline:"2027-04-01", url:"https://cbcfinc.org/scholarships", eligibility:"African American; U.S. citizen or permanent resident; GPA 2.5+; demonstrated financial need", requirements:["Application","Transcript","Essay","Recommendations"], renewable:false, type:"Community Leadership", numAwards:"400+ per year" },
+  { id:77, name:"Atlas Shrugged Essay Contest", org:"Ayn Rand Institute", amount:10000, amountStr:"$1,000–$10,000", minGPA:0, grades:["12","college"], categories:["Writing","Merit"], desc:"Essay competition on Ayn Rand's novel Atlas Shrugged. Open to 12th-grade and college students.", deadline:"2026-09-17", url:"https://www.aynrand.org/students/essay-contests", eligibility:"12th grade or college student; any GPA", requirements:["800-1,600 word essay on Atlas Shrugged"], renewable:false, type:"Essay/Literature", numAwards:"Various" },
+  { id:78, name:"Elaine Chapin Memorial Scholarship", org:"Elaine Chapin Fund", amount:5000, amountStr:"Up to $5,000", minGPA:0, grades:["12","college"], categories:["Need-Based","Merit"], desc:"For students with multiple sclerosis or with a parent, sibling, or spouse with MS, pursuing a post-secondary education.", deadline:"2027-01-31", url:"https://www.msaa.com/our-resources/for-patients/", eligibility:"Student with MS or immediate family member with MS; pursuing post-secondary education", requirements:["Application","MS diagnosis documentation","Essay","Recommendations"], renewable:false, type:"Disability/Medical", numAwards:"Various" },
+  { id:79, name:"Milken Educator Award Scholarship", org:"Milken Family Foundation", amount:10000, amountStr:"$10,000", minGPA:0, grades:["12"], categories:["Merit","Community"], desc:"Given to students who are nominated by their Milken Educator Award-winning teachers. Celebrates excellence in education.", deadline:"2027-05-01", url:"https://www.milkeneducatorawards.org", eligibility:"Student nominated by a Milken Educator Award winner", requirements:["Teacher nomination","Application","Essay"], renewable:false, type:"Educator-Nominated", numAwards:"Varies" },
+  { id:80, name:"Boys & Girls Club Youth of the Year Scholarship", org:"Boys & Girls Clubs of America", amount:5000, amountStr:"Up to $5,000", minGPA:0, grades:["11","12"], categories:["Community","Leadership","Merit"], desc:"Recognizes outstanding Boys & Girls Club members who excel academically and give back to their communities.", deadline:"2027-02-15", url:"https://www.bgca.org/programs/youth-of-the-year", eligibility:"Boys & Girls Club member; 14-18 years old; leadership and academic achievement", requirements:["Club nomination","Application","Essay","Interview"], renewable:false, type:"Community/Leadership", numAwards:"1 national + state winners" },
+  { id:81, name:"Elks Legacy Award Scholarship", org:"Elks National Foundation", amount:4000, amountStr:"$4,000", minGPA:0, grades:["12"], categories:["Community","Merit"], desc:"Open exclusively to the children or grandchildren of Elks members. Based on financial need, scholarship, and community service.", deadline:"2027-01-31", url:"https://www.elks.org/scholars/scholarships/Legacy.cfm", eligibility:"Child or grandchild of Elks member; high school senior; U.S. citizen", requirements:["Elks membership verification","Application","Transcript","Essay"], renewable:false, type:"Legacy/Heritage", numAwards:"250 per year" },
+  { id:82, name:"Phi Kappa Phi Fellowship", org:"Honor Society of Phi Kappa Phi", amount:15000, amountStr:"$5,000–$15,000", minGPA:0, grades:["college"], categories:["Merit","Research","Leadership"], desc:"One of the most prestigious undergraduate scholarships. Supports first-year graduate or professional study at any accredited institution.", deadline:"2027-04-01", url:"https://www.phikappaphi.org/awards-grants/graduate-fellowships", eligibility:"Phi Kappa Phi member; U.S. citizen or permanent resident; pursuing graduate study", requirements:["PKP membership","Application","Recommendations","Study plan"], renewable:false, type:"Graduate Merit", numAwards:"60 per year" },
+  { id:83, name:"Sault Tribe Scholarship", org:"Sault Ste. Marie Tribe of Chippewa Indians", amount:3000, amountStr:"$2,000–$3,000", minGPA:2.0, grades:["12","college"], categories:["Need-Based","Merit"], desc:"For enrolled members of the Sault Ste. Marie Tribe pursuing post-secondary education at accredited institutions.", deadline:"2027-07-01", url:"https://www.saulttribe.com/membership-services/education", eligibility:"Enrolled Sault Tribe member; GPA 2.0+; pursuing accredited degree", requirements:["Tribal enrollment card","Application","Transcript"], renewable:true, type:"Tribal", numAwards:"Various" },
+  { id:84, name:"FinancialPoint Scholarship", org:"FinancialPoint", amount:2000, amountStr:"$2,000", minGPA:0, grades:["12","college"], categories:["Business","Merit"], desc:"Short-essay scholarship for students with a passion for entrepreneurship and small business. Apply online with a brief essay.", deadline:"2027-06-01", url:"https://www.financialpoint.com/scholarship", eligibility:"Current or incoming college student; U.S. citizen; interest in business/entrepreneurship", requirements:["250-word essay","Application"], renewable:false, type:"Business/Entrepreneurship", numAwards:"1 per cycle" },
+  { id:85, name:"National Press Club Scholarship", org:"National Press Club", amount:5000, amountStr:"$500–$5,000", minGPA:3.0, grades:["12","college"], categories:["Writing","Merit","Community"], desc:"For students pursuing careers in journalism. Recognizes commitment to the First Amendment, accuracy, and high journalistic standards.", deadline:"2027-03-01", url:"https://www.press.org/foundation/scholarships", eligibility:"Pursuing journalism degree; GPA 3.0+; U.S. citizen", requirements:["Application","Essay","Writing samples","Recommendations"], renewable:false, type:"Journalism", numAwards:"Various" },
+  { id:86, name:"American Quarter Horse Foundation Scholarship", org:"AQHF", amount:24000, amountStr:"$8,000 (multi-year)", minGPA:2.5, grades:["12","college"], categories:["Athletics","Merit","Community"], desc:"For students who are members of AQHA and can demonstrate financial need, academic achievement, and equine involvement.", deadline:"2027-02-01", url:"https://www.aqha.com/aqhf-scholarships", eligibility:"AQHA member; GPA 2.5+; financial need; equine involvement", requirements:["AQHA membership","Application","Transcript","Essay"], renewable:true, type:"Equine/Agricultural", numAwards:"Various" },
+  { id:87, name:"Discover Scholarship Program", org:"Discover Financial Services", amount:25000, amountStr:"$2,000–$25,000", minGPA:3.0, grades:["12"], categories:["Need-Based","Merit","Community"], desc:"For high school seniors demonstrating leadership, community service, and academic achievement. Selected by independent judges.", deadline:"2026-12-01", url:"https://www.discover.com/student-loans/scholarship", eligibility:"High school senior; GPA 3.0+; community involvement; U.S. citizen or permanent resident", requirements:["Application","Essay","Recommendations","Transcript"], renewable:false, type:"Corporate Merit", numAwards:"50 per year" },
+  { id:88, name:"College JumpStart Scholarship", org:"College JumpStart Scholarship Fund", amount:1000, amountStr:"$1,000", minGPA:0, grades:["10","11","12","college"], categories:["Merit","Community"], desc:"Non-academic scholarship judged on commitment to education and how student will use scholarship. No GPA requirement.", deadline:"2027-04-15", url:"https://www.jumpstart-scholarship.net", eligibility:"10th-12th grade or college student; U.S. citizen or permanent resident; planning to attend/attending college", requirements:["Application","Essay"], renewable:false, type:"Non-Academic Merit", numAwards:"3 per cycle" },
+  { id:89, name:"Dunkin' Donuts Scholarship", org:"Dunkin' Donuts", amount:25000, amountStr:"$1,000–$25,000", minGPA:0, grades:["12","college"], categories:["Need-Based","Merit","Community"], desc:"For Dunkin' employees and their family members who are pursuing higher education. Focuses on academic potential and community involvement.", deadline:"2027-01-15", url:"https://www.dunkindonuts.com/en/about/careers", eligibility:"Dunkin' employee or immediate family; pursuing college degree", requirements:["Employment verification","Application","Essay"], renewable:false, type:"Employee-Based", numAwards:"Varies" },
+  { id:90, name:"Gloria Barron Prize for Young Heroes", org:"Barron Prize Foundation", amount:10000, amountStr:"$10,000", minGPA:0, grades:["9","10","11","12"], categories:["Community","Leadership","Merit"], desc:"For outstanding young leaders 8-18 who have made a significant positive difference in people's lives or the environment.", deadline:"2026-04-15", url:"https://barronprize.org", eligibility:"Student aged 8-18; significant community service or environmental project; U.S. or Canadian resident", requirements:["Application","Project description","Adult endorsement"], renewable:false, type:"Community Hero", numAwards:"25 per year" },
+  { id:91, name:"Regeneron ISEF Grand Awards", org:"Society for Science / Regeneron", amount:75000, amountStr:"Up to $75,000", minGPA:0, grades:["9","10","11","12"], categories:["STEM","Research","Merit"], desc:"International Science and Engineering Fair — the world's largest pre-college science competition. Students present original research for major prizes.", deadline:"2027-01-15", url:"https://www.societyforscience.org/isef", eligibility:"High school student; U.S. or international; qualify through affiliated regional fair", requirements:["Regional fair qualification","Research project","Application"], renewable:false, type:"Science Competition", numAwards:"1,800 awards globally" },
+  { id:92, name:"U.S. Army ROTC Scholarship", org:"U.S. Army", amount:180000, amountStr:"Full tuition + stipend", minGPA:2.5, grades:["12","college"], categories:["Merit","Leadership","STEM"], desc:"Four-year scholarship covering tuition, fees, books, and a monthly stipend. Recipients commission as Army officers upon graduation.", deadline:"2026-11-30", url:"https://www.goarmy.com/rotc/scholarships.html", eligibility:"U.S. citizen; 17-26 years old; GPA 2.5+; physically fit; commit to Army service", requirements:["Application","Physical fitness test","Medical exam","Recommendations","Interview"], renewable:true, type:"Military Service", numAwards:"2,500 per year" },
+  { id:93, name:"Walmart Dependent Scholarship", org:"Walmart Foundation", amount:13000, amountStr:"$2,000–$13,000", minGPA:0, grades:["12"], categories:["Need-Based","Merit"], desc:"For dependents of Walmart and Sam's Club associates. Helps associates' families access higher education.", deadline:"2027-01-31", url:"https://foundation.walmart.com/scholarships", eligibility:"Legal dependent of Walmart/Sam's Club associate; high school senior; U.S. citizen", requirements:["Employment verification","Application","Transcript"], renewable:false, type:"Employee Dependent", numAwards:"Varies" },
+  { id:94, name:"National Space Club Scholarship", org:"National Space Club", amount:10000, amountStr:"$10,000", minGPA:3.0, grades:["college"], categories:["STEM","Research","Merit"], desc:"For junior/senior undergraduates or graduate students interested in astronautical engineering or space sciences.", deadline:"2027-01-31", url:"https://www.spaceclub.org/scholarship.html", eligibility:"U.S. citizen; junior, senior, or graduate student; pursuing space-related field; GPA 3.0+", requirements:["Application","Essay","Transcript","Recommendations"], renewable:false, type:"Aerospace STEM", numAwards:"1 per year" },
+  { id:95, name:"Women in Aviation International Scholarship", org:"Women in Aviation International", amount:10000, amountStr:"$1,000–$10,000", minGPA:0, grades:["12","college"], categories:["STEM","Merit","Leadership"], desc:"WAI provides over $1 million in scholarships to women pursuing careers in aviation and aerospace. Multiple awards available.", deadline:"2026-11-01", url:"https://www.wai.org/scholarships", eligibility:"Woman pursuing aviation or aerospace career; WAI member", requirements:["WAI membership","Application","Essay","Recommendations"], renewable:false, type:"Aviation/STEM", numAwards:"100+ per year" },
+  { id:96, name:"Greenhouse Scholars Program", org:"Greenhouse Scholars", amount:15000, amountStr:"$4,000–$15,000/year", minGPA:3.5, grades:["12"], categories:["Need-Based","Merit","Leadership","First-Gen"], desc:"Holistic program for high-achieving, under-resourced students that combines financial support with mentoring, networking, and professional development.", deadline:"2027-01-15", url:"https://www.greenhousescholars.org", eligibility:"Colorado or Illinois resident; GPA 3.5+; demonstrated financial need; first-gen preferred; strong work history", requirements:["Application","Essays","Recommendations","Interview (finalists)"], renewable:true, type:"Comprehensive Support", numAwards:"30 per year" },
+  { id:97, name:"Albert Baker Fund Scholarship", org:"Albert Baker Fund", amount:5000, amountStr:"$1,500–$5,000", minGPA:2.5, grades:["12","college"], categories:["Need-Based","Merit"], desc:"For Christian Science students pursuing higher education. Provides financial assistance based on need and academic record.", deadline:"2027-04-01", url:"https://www.albertbakerfund.org", eligibility:"Christian Science practitioner or student; pursuing post-secondary education; GPA 2.5+", requirements:["Application","Church member reference","Transcript","Financial documentation"], renewable:true, type:"Faith-Based", numAwards:"Various" },
+  { id:98, name:"FIRST Robotics Scholarship", org:"FIRST (For Inspiration and Recognition of Science & Technology)", amount:5000, amountStr:"$1,000–$5,000", minGPA:0, grades:["12"], categories:["STEM","Leadership","Merit","Community"], desc:"Multiple scholarships for FIRST Robotics participants who demonstrate exceptional teamwork, leadership, and STEM passion.", deadline:"2027-01-31", url:"https://www.firstinspires.org/alumni/scholarships", eligibility:"Graduating FIRST Robotics participant; high school senior", requirements:["FIRST participation record","Application","Essay","Recommendations"], renewable:false, type:"Robotics/STEM", numAwards:"150+ per year" },
+  { id:99, name:"Questbridge College Prep Scholars", org:"QuestBridge", amount:1000, amountStr:"$1,000 + resources", minGPA:3.5, grades:["11"], categories:["Need-Based","Merit","First-Gen"], desc:"For 11th graders who show exceptional promise. Provides scholarship funds, resources, and prepares students to become National College Match finalists.", deadline:"2026-09-26", url:"https://www.questbridge.org/college-prep-scholars", eligibility:"11th grader; household income under $65,000; GPA 3.5+; strong potential", requirements:["Application","Essays","Academic record","Family financial information"], renewable:false, type:"College Prep", numAwards:"300+ per year" },
+  { id:100, name:"Sallie Mae Scholarship", org:"Sallie Mae", amount:5000, amountStr:"$1,000–$5,000", minGPA:0, grades:["12","college"], categories:["Need-Based","Merit"], desc:"Sallie Mae offers multiple scholarship opportunities for students at various education levels. Easy to apply online through the Sallie Mae platform.", deadline:"2027-06-30", url:"https://www.salliemae.com/college-planning/scholarships", eligibility:"Enrolling or enrolled in college; U.S. citizen or eligible non-citizen", requirements:["Application","Essay","Basic enrollment documentation"], renewable:false, type:"General Merit", numAwards:"Various" }
 ];
 
+// ── Auth system ──
+function getUsers() { return JSON.parse(localStorage.getItem('ss_users') || '[]'); }
+function saveUsers(users) { localStorage.setItem('ss_users', JSON.stringify(users)); }
+function getCurrentUser() { return localStorage.getItem('ss_session') || null; }
+function setSession(email) { localStorage.setItem('ss_session', email); }
+function clearSession() { localStorage.removeItem('ss_session'); }
+
+function getSavedIds() {
+  const email = getCurrentUser();
+  if (!email) return new Set(JSON.parse(localStorage.getItem('savedScholarships') || '[]'));
+  const users = getUsers();
+  const user = users.find(u => u.email === email);
+  return new Set(user ? user.saved : []);
+}
+
+function persistSavedIds(ids) {
+  const email = getCurrentUser();
+  if (!email) { localStorage.setItem('savedScholarships', JSON.stringify([...ids])); return; }
+  const users = getUsers();
+  const idx = users.findIndex(u => u.email === email);
+  if (idx >= 0) { users[idx].saved = [...ids]; saveUsers(users); }
+}
+
+let savedIds = getSavedIds();
+
+function openAuth() { document.getElementById('authModal').classList.add('open'); }
+function closeAuth() { document.getElementById('authModal').classList.remove('open'); clearAuthMsgs(); }
+
+function switchAuthTab(tab) {
+  document.getElementById('formLogin').style.display = tab === 'login' ? '' : 'none';
+  document.getElementById('formRegister').style.display = tab === 'register' ? '' : 'none';
+  document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+  document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+  clearAuthMsgs();
+}
+
+function clearAuthMsgs() {
+  const e = document.getElementById('authError'); e.style.display='none'; e.textContent='';
+  const s = document.getElementById('authSuccess'); s.style.display='none'; s.textContent='';
+}
+
+function showAuthError(msg) { const e=document.getElementById('authError'); e.textContent=msg; e.style.display='block'; }
+function showAuthSuccess(msg) { const s=document.getElementById('authSuccess'); s.textContent=msg; s.style.display='block'; }
+
+function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value;
+  clearAuthMsgs();
+  if (!email || !pass) { showAuthError('Please fill in all fields.'); return; }
+  const users = getUsers();
+  const user = users.find(u => u.email === email && u.password === pass);
+  if (!user) { showAuthError('Invalid email or password.'); return; }
+  setSession(email);
+  savedIds = getSavedIds();
+  updateAuthHeader();
+  applyFilters();
+  closeAuth();
+}
+
+function doRegister() {
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('regPass').value;
+  clearAuthMsgs();
+  if (!name || !email || !pass) { showAuthError('Please fill in all fields.'); return; }
+  if (pass.length < 6) { showAuthError('Password must be at least 6 characters.'); return; }
+  const users = getUsers();
+  if (users.find(u => u.email === email)) { showAuthError('An account with this email already exists.'); return; }
+  const guestSaved = JSON.parse(localStorage.getItem('savedScholarships') || '[]');
+  users.push({ name, email, password: pass, saved: guestSaved });
+  saveUsers(users);
+  setSession(email);
+  savedIds = getSavedIds();
+  updateAuthHeader();
+  applyFilters();
+  showAuthSuccess('Account created! You are now signed in.');
+  setTimeout(closeAuth, 1200);
+}
+
+function doSignOut() {
+  clearSession();
+  savedIds = getSavedIds();
+  updateAuthHeader();
+  applyFilters();
+}
+
+function updateAuthHeader() {
+  const btn = document.getElementById('authBtnHeader');
+  const email = getCurrentUser();
+  const savedHeader = document.getElementById('savedCountHeader');
+  savedHeader.textContent = savedIds.size;
+  if (email) {
+    const users = getUsers();
+    const user = users.find(u => u.email === email);
+    const name = user ? user.name.split(' ')[0] : email;
+    btn.innerHTML = `<span class="user-avatar">${name[0].toUpperCase()}</span>${name} · <span onclick="doSignOut()" style="text-decoration:underline;cursor:pointer;">Sign Out</span>`;
+    btn.onclick = null;
+  } else {
+    btn.innerHTML = '👤 Sign In';
+    btn.onclick = openAuth;
+  }
+}
+
+// ── Detail page ──
+let countdownTimer = null;
+function openDetail(id) {
+  const s = scholarships.find(x => x.id === id);
+  if (!s) return;
+  const main = document.getElementById('detailMain');
+  const sidebar = document.getElementById('detailSidebar');
+  const deadlineDate = new Date(s.deadline);
+  const formatted = deadlineDate.toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  const isSaved = savedIds.has(s.id);
+
+  main.innerHTML = `
+    <div>
+      <div class="detail-org-row">🏛️ ${s.org}</div>
+      <div class="detail-name">${s.name}</div>
+    </div>
+    <div class="detail-amount-row">
+      <div class="detail-amount">${s.amountStr}</div>
+      <div class="detail-tags">
+        ${s.grades.map(g=>`<span class="detail-tag grade">${gradeLabel(g)}</span>`).join('')}
+        ${s.minGPA>0?`<span class="detail-tag gpa">GPA ${s.minGPA.toFixed(1)}+</span>`:''}
+        ${s.categories.map(c=>`<span class="detail-tag">${c}</span>`).join('')}
+      </div>
+    </div>
+    <div class="detail-section"><h4>About</h4><p>${s.desc}</p></div>
+    <div class="detail-fields">
+      <div class="detail-field"><div class="detail-field-label">Award Type</div><div class="detail-field-val">${s.type||'—'}</div></div>
+      <div class="detail-field"><div class="detail-field-label">Number of Awards</div><div class="detail-field-val">${s.numAwards||'—'}</div></div>
+      <div class="detail-field"><div class="detail-field-label">Renewable</div><div class="detail-field-val">${s.renewable?'✅ Yes':'❌ No'}</div></div>
+      <div class="detail-field"><div class="detail-field-label">Min GPA</div><div class="detail-field-val">${s.minGPA>0?s.minGPA.toFixed(1)+'+':'No requirement'}</div></div>
+    </div>
+    ${s.eligibility?`<div class="detail-section"><h4>Eligibility</h4><p>${s.eligibility}</p></div>`:''}
+    ${s.requirements&&s.requirements.length?`<div class="detail-section"><h4>Requirements</h4><ul>${s.requirements.map(r=>`<li>${r}</li>`).join('')}</ul></div>`:''}
+    <div class="detail-actions">
+      <a class="btn-apply-lg" href="${s.url}" target="_blank" rel="noopener">🔗 Go to Scholarship →</a>
+      <button class="btn-save-lg ${isSaved?'saved':''}" id="detailSaveBtn" onclick="toggleSave(${s.id});updateDetailSaveBtn(${s.id})">
+        ${isSaved?'⭐ Saved':'☆ Save'}
+      </button>
+    </div>
+  `;
+
+  sidebar.innerHTML = `
+    <div class="countdown-box">
+      <div class="countdown-title">⏳ Time Until Deadline</div>
+      <div id="cdGrid" class="countdown-grid"></div>
+    </div>
+    <div class="sidebar-deadline">
+      <div class="sidebar-deadline-label">Deadline</div>
+      <div class="sidebar-deadline-date">${formatted}</div>
+    </div>
+    <div class="sidebar-info">
+      <div class="sidebar-info-item"><div class="sidebar-info-label">Organization</div><div class="sidebar-info-val">${s.org}</div></div>
+      <div class="sidebar-info-item"><div class="sidebar-info-label">Award Amount</div><div class="sidebar-info-val">${s.amountStr}</div></div>
+      ${s.renewable!==undefined?`<div class="sidebar-info-item"><div class="sidebar-info-label">Renewable</div><div class="sidebar-info-val">${s.renewable?'Yes — can apply each year':'No — one-time award'}</div></div>`:''}
+    </div>
+  `;
+
+  document.getElementById('detailOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (countdownTimer) clearInterval(countdownTimer);
+  function updateCountdown() {
+    const now = new Date();
+    const diff = new Date(s.deadline + 'T23:59:59') - now;
+    const grid = document.getElementById('cdGrid');
+    if (!grid) { clearInterval(countdownTimer); return; }
+    if (diff <= 0) {
+      grid.innerHTML = `<div class="countdown-closed" style="grid-column:1/-1;">Applications Closed</div>`;
+      clearInterval(countdownTimer);
+      return;
+    }
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    grid.innerHTML = [
+      [days,'Days'],[hours,'Hours'],[mins,'Mins'],[secs,'Secs']
+    ].map(([n,l])=>`<div class="countdown-unit"><div class="countdown-num">${String(n).padStart(2,'0')}</div><div class="countdown-label">${l}</div></div>`).join('');
+  }
+  updateCountdown();
+  countdownTimer = setInterval(updateCountdown, 1000);
+}
+
+function updateDetailSaveBtn(id) {
+  const btn = document.getElementById('detailSaveBtn');
+  if (!btn) return;
+  const isSaved = savedIds.has(id);
+  btn.className = 'btn-save-lg' + (isSaved ? ' saved' : '');
+  btn.textContent = isSaved ? '⭐ Saved' : '☆ Save';
+}
+
+function closeDetail(e) {
+  if (e && e.target !== document.getElementById('detailOverlay')) return;
+  closeDetailBtn();
+}
+function closeDetailBtn() {
+  document.getElementById('detailOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDetailBtn(); closeAuth(); } });
+
+// ── Filters & render ──
 let activeCategories = new Set();
 let activeTab = 'all';
-let savedIds = new Set(JSON.parse(localStorage.getItem('savedScholarships') || '[]'));
-
-function saveStorage() {
-  localStorage.setItem('savedScholarships', JSON.stringify([...savedIds]));
-}
 
 function updateGPA(val) {
-  document.getElementById('gpaVal').textContent = parseFloat(val) === 0 ? 'Any' : parseFloat(val).toFixed(1) + '+';
+  document.getElementById('gpaVal').textContent = parseFloat(val)===0 ? 'Any' : parseFloat(val).toFixed(1)+'+';
 }
-
 function toggleTag(el, cat) {
   if (activeCategories.has(cat)) { activeCategories.delete(cat); el.classList.remove('active'); }
   else { activeCategories.add(cat); el.classList.add('active'); }
   applyFilters();
 }
-
 function clearFilters() {
-  document.getElementById('searchInput').value = '';
-  document.getElementById('gradeFilter').value = '';
-  document.getElementById('amountFilter').value = '0';
-  document.getElementById('gpaFilter').value = '0';
-  document.getElementById('gpaVal').textContent = 'Any';
+  document.getElementById('searchInput').value='';
+  document.getElementById('gradeFilter').value='';
+  document.getElementById('amountFilter').value='0';
+  document.getElementById('gpaFilter').value='0';
+  document.getElementById('gpaVal').textContent='Any';
   activeCategories.clear();
-  document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tag').forEach(t=>t.classList.remove('active'));
   applyFilters();
 }
-
 function switchTab(el, tab) {
   activeTab = tab;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   applyFilters();
 }
-
 function daysUntil(dateStr) {
-  const now = new Date(); now.setHours(0,0,0,0);
-  const d = new Date(dateStr); d.setHours(0,0,0,0);
-  return Math.round((d - now) / 86400000);
+  const now=new Date(); now.setHours(0,0,0,0);
+  const d=new Date(dateStr); d.setHours(0,0,0,0);
+  return Math.round((d-now)/86400000);
 }
-
 function deadlineBadge(dateStr) {
-  const days = daysUntil(dateStr);
-  const formatted = new Date(dateStr).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
-  if (days < 0) return `<span class="deadline-badge"><span class="dot deadline-dot-red"></span><span class="deadline-text-red">Closed</span></span>`;
-  if (days === 0) return `<span class="deadline-badge"><span class="dot deadline-dot-red"></span><span class="deadline-text-red">Due Today!</span></span>`;
-  if (days <= 14) return `<span class="deadline-badge"><span class="dot deadline-dot-yellow"></span><span class="deadline-text-yellow">${days} days left · ${formatted}</span></span>`;
-  if (days <= 60) return `<span class="deadline-badge"><span class="dot deadline-dot-yellow"></span><span class="deadline-text-yellow">${formatted}</span></span>`;
+  const days=daysUntil(dateStr);
+  const formatted=new Date(dateStr).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  if (days<0) return `<span class="deadline-badge"><span class="dot deadline-dot-red"></span><span class="deadline-text-red">Closed</span></span>`;
+  if (days===0) return `<span class="deadline-badge"><span class="dot deadline-dot-red"></span><span class="deadline-text-red">Due Today!</span></span>`;
+  if (days<=14) return `<span class="deadline-badge"><span class="dot deadline-dot-yellow"></span><span class="deadline-text-yellow">${days} days left · ${formatted}</span></span>`;
+  if (days<=60) return `<span class="deadline-badge"><span class="dot deadline-dot-yellow"></span><span class="deadline-text-yellow">${formatted}</span></span>`;
   return `<span class="deadline-badge"><span class="dot deadline-dot-green"></span><span class="deadline-text-green">${formatted}</span></span>`;
 }
+function gradeLabel(g) { return g==='college'?'College':`${g}th Grade`; }
 
 function applyFilters() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const grade = document.getElementById('gradeFilter').value;
-  const minAmt = parseInt(document.getElementById('amountFilter').value) || 0;
-  const minGPA = parseFloat(document.getElementById('gpaFilter').value) || 0;
-  const sortBy = document.getElementById('sortBy').value;
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const grade=document.getElementById('gradeFilter').value;
+  const minAmt=parseInt(document.getElementById('amountFilter').value)||0;
+  const minGPA=parseFloat(document.getElementById('gpaFilter').value)||0;
+  const sortBy=document.getElementById('sortBy').value;
 
-  let filtered = scholarships.filter(s => {
-    if (activeTab === 'saved' && !savedIds.has(s.id)) return false;
+  let filtered=scholarships.filter(s=>{
+    if (activeTab==='saved' && !savedIds.has(s.id)) return false;
     if (q && !s.name.toLowerCase().includes(q) && !s.desc.toLowerCase().includes(q) && !s.categories.join(' ').toLowerCase().includes(q) && !s.org.toLowerCase().includes(q)) return false;
     if (grade && !s.grades.includes(grade)) return false;
-    if (s.amount < minAmt) return false;
-    if (minGPA > 0 && s.minGPA > 0 && s.minGPA > minGPA) return false;
-    if (activeCategories.size > 0) {
-      const has = [...activeCategories].some(c => s.categories.includes(c));
-      if (!has) return false;
-    }
+    if (s.amount<minAmt) return false;
+    if (minGPA>0 && s.minGPA>0 && s.minGPA>minGPA) return false;
+    if (activeCategories.size>0) { const has=[...activeCategories].some(c=>s.categories.includes(c)); if (!has) return false; }
     return true;
   });
 
-  if (sortBy === 'deadline') filtered.sort((a,b) => new Date(a.deadline)-new Date(b.deadline));
-  else if (sortBy === 'amount') filtered.sort((a,b) => b.amount-a.amount);
-  else filtered.sort((a,b) => a.name.localeCompare(b.name));
+  if (sortBy==='deadline') filtered.sort((a,b)=>new Date(a.deadline)-new Date(b.deadline));
+  else if (sortBy==='amount') filtered.sort((a,b)=>b.amount-a.amount);
+  else filtered.sort((a,b)=>a.name.localeCompare(b.name));
 
-  document.getElementById('showCount').textContent = filtered.length;
-  document.getElementById('savedCount').textContent = savedIds.size;
+  document.getElementById('showCount').textContent=filtered.length;
+  document.getElementById('savedCount').textContent=savedIds.size;
+  document.getElementById('savedCountHeader').textContent=savedIds.size;
 
-  const container = document.getElementById('cardsContainer');
-  const empty = document.getElementById('emptyState');
+  const container=document.getElementById('cardsContainer');
+  const empty=document.getElementById('emptyState');
+  if (filtered.length===0){ container.innerHTML=''; empty.style.display=''; return; }
+  empty.style.display='none';
 
-  if (filtered.length === 0) {
-    container.innerHTML = '';
-    empty.style.display = '';
-    return;
-  }
-  empty.style.display = 'none';
-
-  container.innerHTML = filtered.map(s => `
-    <div class="card" id="card-${s.id}">
+  container.innerHTML=filtered.map(s=>`
+    <div class="card" id="card-${s.id}" onclick="openDetail(${s.id})">
       <div class="card-top">
         <div>
           <div class="card-title">${s.name}</div>
@@ -630,39 +755,37 @@ function applyFilters() {
       </div>
       <div class="card-desc">${s.desc}</div>
       <div class="card-tags">
-        ${s.grades.map(g => `<span class="card-tag grade">${gradeLabel(g)}</span>`).join('')}
-        ${s.minGPA > 0 ? `<span class="card-tag gpa">GPA ${s.minGPA.toFixed(1)}+</span>` : ''}
-        ${s.categories.map(c => `<span class="card-tag">${c}</span>`).join('')}
+        ${s.grades.map(g=>`<span class="card-tag grade">${gradeLabel(g)}</span>`).join('')}
+        ${s.minGPA>0?`<span class="card-tag gpa">GPA ${s.minGPA.toFixed(1)}+</span>`:''}
+        ${s.categories.map(c=>`<span class="card-tag">${c}</span>`).join('')}
       </div>
       <div class="card-footer">
         ${deadlineBadge(s.deadline)}
-        <div class="card-actions">
+        <div class="card-actions" onclick="event.stopPropagation()">
           <button class="btn-save ${savedIds.has(s.id)?'saved':''}" onclick="toggleSave(${s.id})">
-            ${savedIds.has(s.id) ? '⭐ Saved' : '☆ Save'}
+            ${savedIds.has(s.id)?'⭐ Saved':'☆ Save'}
           </button>
-          <a class="btn-apply" href="${s.url}" target="_blank" rel="noopener">Apply →</a>
+          <button class="btn-view" onclick="openDetail(${s.id})">View Details</button>
         </div>
       </div>
     </div>
   `).join('');
 }
 
-function gradeLabel(g) {
-  if (g === 'college') return 'College';
-  return `${g}th Grade`;
-}
-
 function toggleSave(id) {
+  const email = getCurrentUser();
+  if (!email) {
+    openAuth();
+    return;
+  }
   if (savedIds.has(id)) savedIds.delete(id);
   else savedIds.add(id);
-  saveStorage();
+  persistSavedIds(savedIds);
   applyFilters();
 }
 
-// Live search
 document.getElementById('searchInput').addEventListener('input', applyFilters);
-
-// Init
+updateAuthHeader();
 applyFilters();
 </script>
 </body>
